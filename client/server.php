@@ -63,4 +63,64 @@
 		}
 	}
 
+	if (isset($_POST['update_info'])) {
+		$fname = mysqli_real_escape_string($db, $_POST['fname']);
+		$lname = mysqli_real_escape_string($db, $_POST['lname']);
+		$idnumber = mysqli_real_escape_string($db, $_POST['idnumber']);
+		$phone = mysqli_real_escape_string($db, $_POST['phone']);
+		$county = mysqli_real_escape_string($db, $_POST['county']);
+		$town = mysqli_real_escape_string($db, $_POST['town']);
+		$email = mysqli_real_escape_string($db, $_POST['email']);
+		$userid =mysqli_real_escape_string($db, $_POST['uid']);
+		$dob =mysqli_real_escape_string($db, $_POST['dob']);
+
+		if (empty($fname)) { array_push($errors, "First name is required"); }
+		if (empty($lname)) { array_push($errors, "Last Name is required"); }
+		if (empty($phone)) { array_push($errors, "Phone Required"); }
+		if (empty($town)) { array_push($errors, "Input your Town name"); }
+		if (empty($county)) { array_push($errors, "Insertyou county"); }
+		if (empty($idnumber)) { array_push($errors, "Add your ID number"); }
+
+		// form validation: ensure that the form is correctly filled
+		function validate_phone_number($phone)
+		{
+			// Allow +, - and . in phone number
+			$filtered_phone_number = filter_var($phone, FILTER_SANITIZE_NUMBER_INT);
+			// Remove "-" from number
+			$phone_to_check = str_replace("-", "", $filtered_phone_number);
+			// Check the lenght of number
+			// This can be customized if you want phone number from a specific country
+			if (strlen($phone_to_check) < 9 || strlen($phone_to_check) > 14) {
+			return false;
+			} else {
+			return true;
+			}
+		}
+		//VALIDATE PHONE NUMBER 
+		if (validate_phone_number($phone) !=true) {
+			array_push($errors, "Invalid phone number");
+		}
+
+		if (count($errors) == 0) {
+			$query = "UPDATE users
+						SET
+						
+							email ='$email',
+							fname = '$fname',	
+							lname = '$lname',
+							idnumber ='$idnumber',
+							tel	= '$phone',
+							county = '$county',
+							town = '$town',
+							dob = '$dob'
+						
+						WHERE id ='$userid'";
+			$result = mysqli_query($db, $query);
+		
+			header('location:profile.php');
+		}
+
+
+	}
+
 ?>
