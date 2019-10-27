@@ -60,13 +60,11 @@ unset($_SESSION['id']);
 		<!-- Menu -->
 		<nav id="navigation" class="menu">
 			<ul id="responsive">
-
 				<li><a href="index.php" id="current">Home</a> </li>
-				<li><a href="emergencies.php">emergencies</a></li>
+				<li><a href="bookings.php">Bookings</a></li>
+				<li><a href="scheduled.php">Sessions</a></li>
 				<li><a href="users.php">Users</a></li>
-				<li><a href="staff.php">Staff</a></li>
-				<li><a href="#">Reports</a></li>
-				<!-- <li><a href="blog.html">Blog</a></li> -->
+				<li><a href="reports.php">Reports</a></li>
 			</ul>
 
 			<ul class="float-right">
@@ -100,10 +98,10 @@ unset($_SESSION['id']);
 	<div class="sixteen columns">
 		<h3 class="margin-bottom-25">Popular Categories</h3>
 		<ul id="popular-categories">
-			<li><a href="#"><i class="fa fa-line-chart trigger_popup_fricc"></i>View Reports</a></li>
-			<li><a href="users.php"><i class="fa fa-building-o"></i> Registered Users</a></li>
-			<li><a href="emergencies.php"><i class="fa fa-graduation-cap"></i>Emergencies</a></li>
-			<li><a href="#"><i class="fa fa-laptop"></i> Telecommunications</a></li> 
+			<li><a href="reports.php"><i class="fa fa-line-chart trigger_popup_fricc"></i>Reports</a></li>
+			<li><a href="bookings.php"><i class="fa fa-building-o"></i> Bookings</a></li>
+			<li><a href="scheduled.php"><i class="fa fa-book"></i>Scheduled</a></li>
+			<li><a href="users.php"><i class="fa fa-users"></i> Users</a></li> 
 		</ul>
 
 		<div class="clearfix"></div>
@@ -165,7 +163,7 @@ unset($_SESSION['id']);
 
 		<div class="seven columns">
 			<h4>About</h4>
-			<p>Emergency reporting system is meant ot assist the inhabitants of the County to have access to emergency 
+			<p>Scheduling system is meant ot assist the inhabitants of the County to have access to medical 
 				services offered at the falcility .</p>
 			<a href="#" class="button">Get Started</a>
 		</div>
@@ -174,7 +172,7 @@ unset($_SESSION['id']);
 			<h4>Company</h4>
 			<ul class="footer-links">
 				<li><a href="users.php">users</a></li>
-				<li><a href="emergencies.php">Emergencies</a></li>
+				<li><a href="#">someother</a></li>
 				<li><a href="index.php">Home</a></li>
 			</ul>
 		</div>
@@ -212,7 +210,7 @@ unset($_SESSION['id']);
 					<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
 					<li><a class="linkedin" href="#"><i class="icon-linkedin"></i></a></li>
 				</ul>
-				<div class="copyrights">©  Copyright 2019 by <a href="#">Washington</a>. All Rights Reserved.</div>
+				<div class="copyrights">©  Copyright 2019 by <a href="#">SonnieMugo</a>. All Rights Reserved.</div>
 			</div>
 		</div>
 	</div>

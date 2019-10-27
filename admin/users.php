@@ -23,7 +23,7 @@ unset($_SESSION['id']);
 <!-- Basic Page Needs
 ================================================== -->
 <meta charset="utf-8">
-<title>Emergency Ap</title>
+<title>Admin | Scheduling System</title>
 
 <!-- Mobile Specific Metas
 ================================================== -->
@@ -62,11 +62,11 @@ unset($_SESSION['id']);
 			<ul id="responsive">
 
 				<li><a href="index.php">Home</a> </li>
-				<li><a href="emergencies.php">emergencies</a></li>
+				<li><a href="bookings.php">Bookings</a></li>
+				<li><a href="scheduled.php">Sessions</a></li>
 				<li><a href="users.php" id="current">Users</a></li>
-				<li><a href="staff.php">Staff</a></li>
-				<li><a href="#">Reports</a></li>
-				<!-- <li><a href="blog.html">Blog</a></li> -->
+				<li><a href="reports.php">Reports</a></li>
+			<!-- <li><a href="blog.html">Blog</a></li> -->
 			</ul>
 
 			<ul class="float-right">
@@ -88,24 +88,6 @@ unset($_SESSION['id']);
 
 
 <section class="section intro">
-
-	<div class="container">
-		<div style="padding: 6px 12px; border: 1px solid #ccc;">
-			QUICK LINKS:   
-			<a href="#pending"><button type="button" class="btn btn-outline-secondary">Pending </button></a>
-			<a href="#approved"><button type="button" class="btn btn-outline-secondary">Approved </button></a>
-			<a href="#rejected"><button type="button" class="btn btn-outline-secondary">Rejected </button></a>
-		</div>
-	</div>
-	<br>
-	
-	<div class="container" id="pending">
-		<div style="padding: 6px 12px; border: 1px solid #ccc;">
-			<h3>Users and Reported Emergencies</h3> 
-			<p>A mapping of the users andd count of emergencies they have reported</p> 
-		</div>
-	</div>
-
 	<br>
 	<div class="container" id="rejected">
 		<div style="padding: 6px 12px; border: 1px solid #ccc;">
@@ -114,30 +96,33 @@ unset($_SESSION['id']);
 			<table class="table table-bordered table-striped table-dark">
 				<thead>
 					<tr>
-					<th scope="col">U. Id</th>
-					<th scope="col">User Name</th>
-					<th scope="col">Other Names</th>
-					<th scope="col">email </th>
-					<th scope="col">Tel No </th>
-					<th scope="col">ID. No</th>
+						<th scope="col">U. Id</th>
+						<th scope="col">User Names</th>
+						<th scope="col">email </th>
+						<th scope="col">Tel No </th>
+						<th scope="col">ID. No</th>
+						<th scope="col">Location</th>
+						<th scope="col">Date Registered</th>
 					</tr>
 				</thead>
 				<tbody>
 					<!-- [ LOOP THE REGISTERED AGENTS ] -->
 					<?php
 
-					$sql = "SELECT * FROM userprofile ";
+					$sql = "SELECT * FROM users ";
 					$result = mysqli_query($db, $sql);
 					while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 					{	
-						$names = $row[3]." ".$row[4];
+						$names = $row[1]." ".$row[2];
+						$loca = $row[6].", ".$row[5];
 						echo '<tr>';
 							echo '<td>'.$row[0].'</td> '; // E ID 
-							echo '<td>'.$row[1].'</td> '; //USER
-							echo '<td>'.$names.'</td> '; //Title
-							echo '<td>'.$row[2].'</td> '; //Title
-							echo '<td>'.$row[6].'</td> '; //Title
-							echo '<td>'.$row[5].'</td> '; //Title
+							echo '<td>'.$names.'</td> '; //names
+							echo '<td>'.$row[8].'</td> '; //email
+							echo '<td>'.$row[4].'</td> '; //telno
+							echo '<td>'.$row[3].'</td> '; //id number
+							echo '<td>'.$loca.'</td> '; //location
+							echo '<td>'.$row[10].'</td> '; //date registered
 						echo '</tr>';
 					}
 					?>
@@ -153,7 +138,7 @@ unset($_SESSION['id']);
 <!-- Infobox -->
 <div class="infobox">
 	<div class="container">
-		<div class="sixteen columns">Emergency Reporting System Dashboard <a href="#">ADMIN</a></div>
+		<div class="sixteen columns">Scheduling System Dashboard <a href="#">ADMIN</a></div>
 	</div>
 </div>
 
@@ -169,7 +154,7 @@ unset($_SESSION['id']);
 
 		<div class="seven columns">
 			<h4>About</h4>
-			<p>Emergency reporting system is meant ot assist the inhabitants of the County to have access to emergency 
+			<p>Scheduling system is meant ot assist the inhabitants of the County to have access to medical 
 				services offered at the falcility .</p>
 			<a href="#" class="button">Get Started</a>
 		</div>
@@ -178,7 +163,7 @@ unset($_SESSION['id']);
 			<h4>Company</h4>
 			<ul class="footer-links">
 				<li><a href="users.php">users</a></li>
-				<li><a href="emergencies.php">Emergencies</a></li>
+				<li><a href="#">someother</a></li>
 				<li><a href="index.php">Home</a></li>
 			</ul>
 		</div>
@@ -216,7 +201,7 @@ unset($_SESSION['id']);
 					<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
 					<li><a class="linkedin" href="#"><i class="icon-linkedin"></i></a></li>
 				</ul>
-				<div class="copyrights">©  Copyright 2019 by <a href="#">Washington</a>. All Rights Reserved.</div>
+				<div class="copyrights">©  Copyright 2019 by <a href="#">SonnieMugo</a>. All Rights Reserved.</div>
 			</div>
 		</div>
 	</div>

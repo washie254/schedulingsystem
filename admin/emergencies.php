@@ -62,9 +62,9 @@ unset($_SESSION['id']);
 			<ul id="responsive">
 
 				<li><a href="index.php">Home</a> </li>
-				<li><a href="emergencies.php" id="current">Emergencies</a></li>
-				<li><a href="users.php">Users</a></li>
-				<li><a href="staff.php">Staff</a></li>
+				<li><a href="bookings.php" id="current">Bookings</a></li>
+				<li><a href="#">Sessions</a></li>
+				<li><a href="#">Users</a></li>
 				<li><a href="#">Reports</a></li>
 				<!-- <li><a href="blog.html">Blog</a></li> -->
 			</ul>

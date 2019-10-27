@@ -7,7 +7,7 @@
 	$_SESSION['success'] = "";
 
 	// connect to database
-	$db = mysqli_connect('localhost', 'root', '', 'africand_emr');
+	$db = mysqli_connect('localhost', 'root', '', 'dkut_scheduling_system');
 
 	// LOGIN ADMINISTRATOR
 	if (isset($_POST['login_admin'])) {
