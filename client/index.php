@@ -115,8 +115,6 @@ unset($_SESSION['id']);
 </div>
 
 
-
-
 <!-- Testimonials -->
 <div id="testimonials">
 	<!-- Slider -->
@@ -125,12 +123,12 @@ unset($_SESSION['id']);
 			<div class="testimonials-slider">
 				  <ul class="slides">
 				    <li>
-				      <p> Emergecncy reporting systemhas lota of funvtions 
+				      <p> Scheduling reporting systemhas lota of funvtions 
 				      <span>No 1 , nose</span></p>
 				    </li>
 
 				    <li>
-				      <p>Emergencies should not be taken lightly 
+				      <p>Scheduling should not be taken lightly 
 				      <span>Med 10,42 </span></p>
 				    </li>
 				    
@@ -149,7 +147,7 @@ unset($_SESSION['id']);
 <!-- Infobox -->
 <div class="infobox">
 	<div class="container">
-		<div class="sixteen columns">Emergency Reporting System Dashboard <a href="#">ADMIN</a></div>
+		<div class="sixteen columns">SchedulingReporting System Dashboard <a href="#">ADMIN</a></div>
 	</div>
 </div>
 

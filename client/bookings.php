@@ -1,6 +1,6 @@
 <?php 
-	
-session_start(); 
+include('server.php');
+//session_start(); 
 
 if (!isset($_SESSION['username'])) {
 	$_SESSION['msg'] = "You must log in first";
@@ -89,31 +89,142 @@ unset($_SESSION['id']);
 
 <!-- Banner
 ================================================== -->
+<section class="section intro">
+
+    <div class="container">
+        <div  style="padding: 6px 12px; border: 1px solid #ccc;">
+
+            <div class="tab">
+                <button class="tablinks" onclick="openCity(event, 'Request')" id="defaultOpen">Request A booking</button>
+                <button class="tablinks" onclick="openCity(event, 'Requested')">Requested Bookings</button>
+                <button class="tablinks" onclick="openCity(event, 'Completed')">Completed Bookings</button>
+            </div>
+
+            <div id="Request" class="tabcontent">
+                <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+                <h3>Request a booking</h3>
+                <p>Fill in the following details to request a booking</p>
+
+		<?php 
+			// userid	usernames	
+			// catid	catname	
+			// bookdate	booktime
+
+			// title	
+			// description	
+			
+			// status
 
 
+		?>
 
-<!-- Content
-================================================== -->
+				<form class="form" action="bookings.php" method="post">
+					
+                 
+                    <div class="form-group">	
+                        <div class="col-xs-6">
+                            <label for="Title"><h4>Title</h4></label>
+                            <input type="text" class="form-control" name="title" id="title" placeholder="A brief title">
+                        </div>
+                    </div>
+					<div class="form-group">	
+                        <div class="col-xs-6">
+                            <label for="phone"><h4>Category</h4></label>
+							<?php
+                                               
+                            $result = $db->query("select id, catname FROM category");
+                            echo "<select  class='form-control' name='category'>";
+                              while ($row = $result->fetch_assoc()) {
+                                unset($id, $name);
+                                $id = $row['id'];
+                                $name = $row['catname']; 
+                                echo '<option value="'.$name.'">'.$name.'</option>';      
+                              }
+                            echo "</select>";
+							?>
+                        </div>
+                    </div>
 
-<!-- Categories -->
-<div class="container">
-	<div class="sixteen columns">
-		<h3 class="margin-bottom-25">Book / Request a Session </h3>
-		<ul id="popular-categories">
-            <li><a href="sessions.php"><i class="fa fa-line-chart trigger_popup_fricc"></i>Sessions Reports</a></li>
-			<li><a href="profile.php"><i class="fa fa-user"></i> My Account</a></li>
-			<li><a href="bookings.php"><i class="fa fa-building-o"></i>Bookings</a></li>
-			<li><a href="#"><i class="fa fa-laptop"></i> Telecommunications</a></li>
-		</ul>
 
-		<div class="clearfix"></div>
-		<div class="margin-top-30"></div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="county"><h4>Description</h4></label>
+                            <textarea type="text" class="form-control" name="description" placeholder="Add a brief description">
+							</textarea>
+						</div>
+                    </div>
+					
+					<?php
+					 $user= $_SESSION["username"];
+					//  $query = "SELECT *FROM users WHERE username ='$user'";
+					//  $res = 
 
-		<a href="#" class="button centered">Other Functions</a>
-		<div class="margin-bottom-50"></div>
-	</div>
+					 $resultz = mysqli_query($db,"SELECT * FROM users WHERE username ='$user'");
+                     $rowz= mysqli_fetch_array($resultz);
+					?>
+                    <div class="form-group">
+                        <input type="text" id="uid" name="uid" style="opacity: 0;" value="<?=$uid?>"/>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <br>
+                            <button class="btn btn-lg btn-success" type="submit" name="book"><i class="glyphicon glyphicon-ok-sign"></i> UPDATE PROFILE</button>
+                        </div>
+                    </div>
+                </form>
+               
+            </div>
+
+            <div id="Requested" class="tabcontent">
+                <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+                <h3>Requested Bookings and their status</h3>
+                <p>the following are the bookings you have made and their status</p> 
+                <style>
+                    .error {
+                        width: 100%; 
+                        margin: 0px auto; 
+                        padding: 10px; 
+                        border: 1px solid #a94442; 
+                        color: #a94442; 
+                        background: #f2dede; 
+                        border-radius: 5px; 
+                        text-align: left;
+                    }
+				</style>
+            </div>
+
+
+            <div id="Completed" class="tabcontent">
+                <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
+                <h3>Your Sessions</h3>
+                <p>The following are your sessions and their remarks from the doctor .</p>
+            </div>
+
+            <script>
+                function openCity(evt, cityName) {
+                    var i, tabcontent, tablinks;
+                    tabcontent = document.getElementsByClassName("tabcontent");
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+                    tablinks = document.getElementsByClassName("tablinks");
+
+                    for (i = 0; i < tablinks.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+                    document.getElementById(cityName).style.display = "block";
+                    evt.currentTarget.className += " active";
+                }
+
+                // Get the element with id="defaultOpen" and click on it
+                document.getElementById("defaultOpen").click();
+            </script>
+        </div><!--/col-9-->
+    </div><!--/row-->
 </div>
-
+</div>
+</section>
 
 
 
@@ -125,12 +236,12 @@ unset($_SESSION['id']);
 			<div class="testimonials-slider">
 				  <ul class="slides">
 				    <li>
-				      <p> Emergecncy reporting systemhas lota of funvtions 
+				      <p> Scheduling reporting systemhas lota of funvtions 
 				      <span>No 1 , nose</span></p>
 				    </li>
 
 				    <li>
-				      <p>Emergencies should not be taken lightly 
+				      <p>Scheduling should not be taken lightly 
 				      <span>Med 10,42 </span></p>
 				    </li>
 				    
@@ -149,7 +260,7 @@ unset($_SESSION['id']);
 <!-- Infobox -->
 <div class="infobox">
 	<div class="container">
-		<div class="sixteen columns">Emergency Reporting System Dashboard <a href="#">ADMIN</a></div>
+		<div class="sixteen columns">Scheduling Reporting System Dashboard <a href="#">ADMIN</a></div>
 	</div>
 </div>
 

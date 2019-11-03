@@ -190,7 +190,7 @@ unset($_SESSION['id']);
 	<div class="container" id="approved">
 		<div style="padding: 6px 12px; border: 1px solid #ccc;">
 			<h3>Approved Bookings</h3> 
-			<p> The Following are the Approved accounts </p>  
+			<p> The Following are the Approved Bookings </p>  
 		</div>
 		<table class="table table-bordered table-striped">
 				<thead>

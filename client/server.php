@@ -122,5 +122,30 @@
 
 
 	}
+	
+	if (isset($_POST['book'])) {
+		$title = mysqli_real_escape_string($db, $_POST['title']);
+		$category = mysqli_real_escape_string($db,$_POST['category']);
+		$description = mysqli_real_escape_string($db, $_POST['description']);
+		
+		$userid = mysqli_real_escape_string($db, $_POST['userid']);
+		$usernames = mysqli_real_escape_string($db, $_POST['usernames']);
+		$bookdate = date("Y-m-d");
+		$booktime = date("h:i:s");
+		$status = 'PENDING';
 
+		if (empty($title)) { array_push($errors, "Add a brief title !"); }
+		if (empty($usernames)) { array_push($errors, "Your User Information Couln't be captured"); }
+		if (empty($description)) { array_push($errors, "Add a description pertaining the booking"); }
+
+		
+
+		if (count($errors) == 0) {
+			$query = "INSERT INTO bookings (userid, usernames, catname, bookdate, booktime, title, description, status) 
+					  VALUES('$userid', '$usernames','$category','$bookdate','$booktime','$title','$description','$status')";
+			mysqli_query($db, $query);
+
+			header('location: bookings.php');
+		}
+	}
 ?>
