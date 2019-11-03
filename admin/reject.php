@@ -125,7 +125,6 @@ unset($_SESSION['id']);
 
 					  }
 					?>
-                  
                  
                     <div class="form-group">	
                         <div class="col-xs-6">

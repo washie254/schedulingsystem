@@ -23,7 +23,7 @@ unset($_SESSION['id']);
 <!-- Basic Page Needs
 ================================================== -->
 <meta charset="utf-8">
-<title>Emergency Ap</title>
+<title>Scheduling Ap</title>
 
 <!-- Mobile Specific Metas
 ================================================== -->
@@ -101,8 +101,8 @@ unset($_SESSION['id']);
 	
 	<div class="container" id="pending">
 		<div style="padding: 6px 12px; border: 1px solid #ccc;">
-			<h3>Users and Reported Emergencies</h3> 
-			<p>A mapping of the users andd count of emergencies they have reported</p> 
+			<h3>Users and Reported Scheduling</h3> 
+			<p>A mapping of the users andd count of Scheduling they have reported</p> 
 		</div>
 	</div>
 
@@ -153,7 +153,7 @@ unset($_SESSION['id']);
 <!-- Infobox -->
 <div class="infobox">
 	<div class="container">
-		<div class="sixteen columns">Emergency Reporting System Dashboard <a href="#">ADMIN</a></div>
+		<div class="sixteen columns">Scheduling Reporting System Dashboard <a href="#">ADMIN</a></div>
 	</div>
 </div>
 

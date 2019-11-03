@@ -23,7 +23,7 @@ unset($_SESSION['id']);
 <!-- Basic Page Needs
 ================================================== -->
 <meta charset="utf-8">
-<title>Emergency Ap</title>
+<title>Scheduling Ap</title>
 
 <!-- Mobile Specific Metas
 ================================================== -->
@@ -62,7 +62,7 @@ unset($_SESSION['id']);
 			<ul id="responsive">
 
 				<li><a href="index.php">Home</a> </li>
-				<li><a href="emergencies.php">emergencies</a></li>
+				<li><a href="Scheduling.php">Scheduling</a></li>
                 <li><a href="users.php">Users</a></li>
 				<li><a href="staff.php" id="current">Staff</a></li>
 				<li><a href="#">Reports</a></li>
@@ -121,7 +121,7 @@ unset($_SESSION['id']);
 <!-- Infobox -->
 <div class="infobox">
 	<div class="container">
-		<div class="sixteen columns">Emergency Reporting System Dashboard <a href="#">ADMIN</a></div>
+		<div class="sixteen columns">Scheduling Reporting System Dashboard <a href="#">ADMIN</a></div>
 	</div>
 </div>
 
@@ -137,7 +137,7 @@ unset($_SESSION['id']);
 
 		<div class="seven columns">
 			<h4>About</h4>
-			<p>Emergency reporting system is meant ot assist the inhabitants of the County to have access to emergency 
+			<p>Scheduling reporting system is meant ot assist the inhabitants of the County to have access to Scheduling 
 				services offered at the falcility .</p>
 			<a href="#" class="button">Get Started</a>
 		</div>
@@ -146,7 +146,7 @@ unset($_SESSION['id']);
 			<h4>Company</h4>
 			<ul class="footer-links">
 				<li><a href="users.php">users</a></li>
-				<li><a href="emergencies.php">Emergencies</a></li>
+				<li><a href="Scheduling.php">Scheduling</a></li>
 				<li><a href="index.php">Home</a></li>
 			</ul>
 		</div>
