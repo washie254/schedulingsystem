@@ -182,18 +182,41 @@ unset($_SESSION['id']);
                 <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
                 <h3>Requested Bookings and their status</h3>
                 <p>the following are the bookings you have made and their status</p> 
-                <style>
-                    .error {
-                        width: 100%; 
-                        margin: 0px auto; 
-                        padding: 10px; 
-                        border: 1px solid #a94442; 
-                        color: #a94442; 
-                        background: #f2dede; 
-                        border-radius: 5px; 
-                        text-align: left;
-                    }
-				</style>
+				<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+					<th scope="col">Book#</th>
+					<th scope="col">Title</th>
+					<th scope="col">Category</th>
+					<th scope="col">Description</th>
+					<th scope="col">B. Date</th>
+					<th scope="col">B. Time </th>
+					<th scope="col">Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- [ LOOP THE REGISTERED AGENTS ] -->
+					<?php
+
+
+					$sql = "SELECT * FROM bookings WHERE userid='$uid'";
+					$result = mysqli_query($db, $sql);
+					while($row = mysqli_fetch_array($result, MYSQLI_NUM))
+					{	
+					
+						echo '<tr>';
+							echo '<td>'.$row[0].'</td> '; //  ID 
+							echo '<td>'.$row[6].'</td> '; //Title
+							echo '<td>'.$row[3].'</td> '; //Category
+							echo '<td>'.$row[7].'</td> '; //Description
+							echo '<td>'.$row[4].'</td> '; //Date
+							echo '<td>'.$row[5].'</td> '; //Time
+							echo '<td>'.$row[8].'</td> '; //Status
+						echo '</tr>';
+					}
+					?>
+				</tbody>
+			</table>
             </div>
 
 
