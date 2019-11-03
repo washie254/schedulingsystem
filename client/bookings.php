@@ -119,7 +119,22 @@ unset($_SESSION['id']);
 		?>
 
 				<form class="form" action="bookings.php" method="post">
-					
+				<?php include('errors.php');?>
+				<?php
+					  $user = $_SESSION['username'];
+					  $query2 = "SELECT * FROM users WHERE username='$user'";
+					  $result2 = mysqli_query($db, $query2);
+					  while($row = mysqli_fetch_array($result2, MYSQLI_NUM)){
+						  $uid = $row[0]; // E ID 
+						  $uname = $row[1];
+						  $names = $row[2] ." ".$row[3]; 
+
+					  }
+					?>
+                    <div class="form-group">
+                        <input type="text" id="uid" name="userid" style="opacity: 0;" value="<?=$uid?>"/>
+						<input type="text" id="uid" name="usernames" style="opacity: 0;" value="<?=$names?>"/>
+                    </div>
                  
                     <div class="form-group">	
                         <div class="col-xs-6">
@@ -148,28 +163,15 @@ unset($_SESSION['id']);
 
                     <div class="form-group">
                         <div class="col-xs-6">
-                            <label for="county"><h4>Description</h4></label>
-                            <textarea type="text" class="form-control" name="description" placeholder="Add a brief description">
-							</textarea>
+                            <label for="description"><h4>Description</h4></label>
+                            <textarea type="text" class="form-control" name="description" placeholder="Add a brief description"></textarea>
 						</div>
-                    </div>
-					
-					<?php
-					 $user= $_SESSION["username"];
-					//  $query = "SELECT *FROM users WHERE username ='$user'";
-					//  $res = 
-
-					 $resultz = mysqli_query($db,"SELECT * FROM users WHERE username ='$user'");
-                     $rowz= mysqli_fetch_array($resultz);
-					?>
-                    <div class="form-group">
-                        <input type="text" id="uid" name="uid" style="opacity: 0;" value="<?=$uid?>"/>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-12">
                             <br>
-                            <button class="btn btn-lg btn-success" type="submit" name="book"><i class="glyphicon glyphicon-ok-sign"></i> UPDATE PROFILE</button>
+                            <button class="btn btn-lg btn-success" style="width:98%;" type="submit" name="book"><i class="glyphicon glyphicon-ok-sign"></i> Make Request</button>
                         </div>
                     </div>
                 </form>

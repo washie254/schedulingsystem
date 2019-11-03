@@ -80,17 +80,10 @@ unset($_SESSION['id']);
 		<div id="mobile-navigation">
 			<a href="#menu" class="menu-trigger"><i class="fa fa-reorder"></i> Menu</a>
 		</div>
-
 	</div>
 </div>
 </header>
 <div class="clearfix"></div>
-
-
-<!-- Banner
-================================================== -->
-
-
 
 <!-- Content
 ================================================== -->

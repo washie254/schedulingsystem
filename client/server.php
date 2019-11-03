@@ -1,4 +1,5 @@
 <?php 
+	date_default_timezone_set("Africa/Nairobi");
 	session_start();
 	// variable declaration
 	$username = "";
@@ -130,6 +131,7 @@
 		
 		$userid = mysqli_real_escape_string($db, $_POST['userid']);
 		$usernames = mysqli_real_escape_string($db, $_POST['usernames']);
+
 		$bookdate = date("Y-m-d");
 		$booktime = date("h:i:s");
 		$status = 'PENDING';
