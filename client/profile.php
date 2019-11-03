@@ -278,7 +278,7 @@ unset($_SESSION['id']);
             <div id="Tokyo" class="tabcontent">
                 <span onclick="this.parentElement.style.display='none'" class="topright">&times</span>
                 <h3>MORE INFO</h3>
-                <p> hajh hj hajhaj .</p>
+                <p> Some additional informatin will be here.</p>
             </div>
 
             <script>
@@ -304,9 +304,7 @@ unset($_SESSION['id']);
     </div><!--/row-->
 </div>
 </div>	
-		<!-- End home-about Area -->	
-
-    ////////////////////////////////////////////////////////////////////////////////////////////
+		<!-- End home-about Area -->
 </section>
 <br>
 <div class="clearfix"></div>

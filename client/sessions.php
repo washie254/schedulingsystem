@@ -98,13 +98,81 @@ unset($_SESSION['id']);
 <!-- Categories -->
 <div class="container">
 	<div class="sixteen columns">
-		<h3 class="margin-bottom-25">Popular Categories</h3>
-		<ul id="popular-categories">
-            <li><a href="sessions.php"><i class="fa fa-line-chart trigger_popup_fricc"></i>Sessions Reports</a></li>
-			<li><a href="profile.php"><i class="fa fa-user"></i> My Account</a></li>
-			<li><a href="bookings.php"><i class="fa fa-building-o"></i>Bookings</a></li>
-			<li><a href="#"><i class="fa fa-laptop"></i> Telecommunications</a></li>
-		</ul>
+		<h3 class="margin-bottom-25">Sessions Tracker</h3>
+		<p>Completed Sessions and progress will be here. Doctor's remarks will also be here to 
+		assist you to followup on the bookings</p>
+
+		<!-- <div class="card" style="width: 18rem;">
+			<img src="images/Counselling.jpg" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">Counselling</h5>
+				<p class="card-text"><b>Doctors Remarks:</b><br>You need to watch on your Temparamental attribution and try not to let that take over you.</p>
+				<a href="#" class="btn btn-primary">View Info</a>
+			</div>
+		</div> -->
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="card">
+				<img src="images/Counselling.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">Counselling</h5>
+					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+					<a href="#" class="btn btn-primary">View Info</a>
+				</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="card">
+				<img src="images/Therapy.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">Therapy</h5>
+					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+					<a href="#" class="btn btn-primary">View Info</a>
+				</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="card">
+				<img src="images/Medical.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">Medical Checkup</h5>
+					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+					<a href="#" class="btn btn-primary">View Info</a>
+				</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="card">
+				<img src="images/Therapy.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">Therapy</h5>
+					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+					<a href="#" class="btn btn-primary">View Info</a>
+				</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="card">
+				<img src="images/therapy.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">Therapy</h5>
+					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+					<a href="#" class="btn btn-primary">View Info</a>
+				</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="card">
+				<img src="images/Counselling.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">Counselling</h5>
+					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+					<a href="#" class="btn btn-primary">View Info</a>
+				</div>
+				</div>
+			</div>
+			
+		</div>
 
 		<div class="clearfix"></div>
 		<div class="margin-top-30"></div>
