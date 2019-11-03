@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2019 at 03:56 PM
+-- Generation Time: Nov 03, 2019 at 09:11 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.1.32
 
@@ -52,7 +52,6 @@ CREATE TABLE `bookings` (
   `id` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `usernames` varchar(60) NOT NULL,
-  `catid` int(11) NOT NULL,
   `catname` varchar(30) NOT NULL,
   `bookdate` date NOT NULL,
   `booktime` time NOT NULL,
@@ -65,6 +64,14 @@ CREATE TABLE `bookings` (
   `reasonforrejection` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `bookings`
+--
+
+INSERT INTO `bookings` (`id`, `userid`, `usernames`, `catname`, `bookdate`, `booktime`, `title`, `description`, `status`, `allocateddate`, `allocatedtime`, `notes`, `reasonforrejection`) VALUES
+(1, 1, 'ravenous Mwamba', 'Counselling', '2019-11-03', '07:15:06', 'Personal Guidance', 'I\'m a campus student and i seek guidance on a psychological breakdown that i\'m going through. did not have anyone to turn to for the advice and i would appreciate a lot if i got some help. Thanks . Regards Raven', 'REJECTED', '0000-00-00', '00:00:00', '', 'we are not dealing with psychological  issues at the moment. Try some other time '),
+(2, 1, 'ravenous Mwamba', 'Therapy', '2019-11-03', '08:42:15', 'Leukemia Therapy', 'i need to start a leukemia therapy and would like to be advised on how to go about it', 'PENDING', '0000-00-00', '00:00:00', '', '');
+
 -- --------------------------------------------------------
 
 --
@@ -75,6 +82,16 @@ CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `catname` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `catname`) VALUES
+(1, 'Therapy'),
+(2, 'Counselling'),
+(3, 'Medical Checkup'),
+(4, 'Surgery');
 
 -- --------------------------------------------------------
 
@@ -160,13 +177,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
