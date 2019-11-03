@@ -108,32 +108,40 @@ unset($_SESSION['id']);
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-					<th scope="col">E. Id</th>
-					<th scope="col">User</th>
-					<th scope="col">E. Image</th>
-					<th scope="col">E. Title </th>
-					<th scope="col">e. Description</th>
-					<th scope="col">location</th>
-					<th scope="col">Date Reported</th>
+					<th scope="col"><b>Book#</b></th>
+					<th scope="col"><b>User</b></th>
+					<th scope="col"><b>Title</b></th>
+					<th scope="col"><b>Category</b></th>
+					<th scope="col"><b>Description</b></th>
+					<th scope="col"><b>B.Date & Time</b></th>
+					<th scope="col"><b>B. Time</b> </th>
+					<th scope="col"><b>Status</b></th>
+					<th scope="col"><b>Action</b></th>
 					</tr>
 				</thead>
 				<tbody>
 					<!-- [ LOOP THE REGISTERED AGENTS ] -->
 					<?php
 
-					$sql = "SELECT * FROM emergency WHERE status='PENDING'";
+
+					$sql = "SELECT * FROM bookings WHERE status='PENDING' ORDER BY catname";
 					$result = mysqli_query($db, $sql);
 					while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 					{	
 					
 						echo '<tr>';
-							echo '<td>'.$row[0].'</td> '; // E ID 
-							echo '<td>'.$row[2].'</td> '; //USER
-							echo '<td><img src="../client/EmergencyImages/'.$row[3].'" style="width:100px; height:80x;"/></td> '; //IMAGE
-							echo '<td>'.$row[4].'</td> '; //Title
+							echo '<td>'.$row[0].'</td> '; //  ID 
+							echo '<td>'.$row[2].'</td> '; //  ID 
 							echo '<td>'.$row[6].'</td> '; //Title
-							echo '<td>'.$row[7].'<br> Coords:'.$row[8].' , '.$row[9].'</td> '; //Title
-							echo '<td>'.$row[10].' At '.$row[11].' </td> '; //Title
+							echo '<td>'.$row[3].'</td> '; //Category
+							echo '<td>'.$row[7].'</td> '; //Description
+							echo '<td>'.$row[4].'</td> '; //Date
+							echo '<td>'.$row[5].'</td> '; //Time
+							echo '<td>'.$row[8].'</td> '; //Status
+							echo '<td>
+									<a href="accept.php?id='.$row[0].'"><strong><button type="button" class="btn btn-success">Accept</button>
+									<a href="reject.php?id='.$row[0].'"><strong><button type="button" class="btn btn-danger">Reject</button>
+								  </td>';
 						echo '</tr>';
 					}
 					?>

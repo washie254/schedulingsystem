@@ -63,4 +63,22 @@
 		}
 	}
 
+	if (isset($_POST['reject'])) {
+		$reason = mysqli_real_escape_string($db, $_POST['reason']);
+		$bid= mysqli_real_escape_string($db,$_POST['bid']);
+
+		if (empty($reason)) { array_push($errors, "You Have to add reason for rejection"); }
+
+		if (count($errors) == 0) {//encrypt the password before saving in the database
+			$query = "UPDATE bookings SET 
+						status='REJECTED',
+						reasonforrejection = '$reason'
+						WHERE id = '$bid'
+					";
+			mysqli_query($db, $query);
+
+			header('location: bookings.php');
+		}
+	}
+
 ?>

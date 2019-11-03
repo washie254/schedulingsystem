@@ -185,13 +185,13 @@ unset($_SESSION['id']);
 				<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-					<th scope="col">Book#</th>
-					<th scope="col">Title</th>
-					<th scope="col">Category</th>
-					<th scope="col">Description</th>
-					<th scope="col">B. Date</th>
-					<th scope="col">B. Time </th>
-					<th scope="col">Status</th>
+					<th scope="col"><b>Book#</b></th>
+					<th scope="col"><b>Title</b></th>
+					<th scope="col"><b>Category</b></th>
+					<th scope="col"><b>Description</b></th>
+					<th scope="col"><b>B. Date</b></th>
+					<th scope="col"><b>B. Time</b> </th>
+					<th scope="col"><b>Status</b></th>
 					</tr>
 				</thead>
 				<tbody>
