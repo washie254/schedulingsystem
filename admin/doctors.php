@@ -131,19 +131,19 @@ unset($_SESSION['id']);
                 <div class="form-group">	
                     <div class="col-xs-6">
                         <label for="username"><h4>Username</h4></label>
-                        <input type="text" class="form-control" name="title" id="title" placeholder="Specialist Username">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Specialist Username">
                     </div>
                 </div>
                 <div class="form-group">	
                     <div class="col-xs-6">
                         <label for="email"><h4>Email</h4></label>
-                        <input type="email" class="form-control" name="title" id="title" placeholder="Add email address">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Add email address">
                     </div>
                 </div>
 
                 <div class="form-group">	
                     <div class="col-xs-6">
-                        <label for="phone"><h4>Category</h4></label>
+                        <label for="category"><h4>Category</h4></label>
                         <?php
                                         
                             $result = $db->query("select id, catname FROM categories");
@@ -152,7 +152,7 @@ unset($_SESSION['id']);
                                 unset($id, $name);
                                 $id = $row['id'];
                                 $name = $row['catname']; 
-                                echo '<option value="'.$name.'">'.$name.'</option>';      
+                                echo '<option value="'.$id.'">'.$name.'</option>';      
                                 }
                             echo "</select>";
                         ?>
@@ -160,7 +160,7 @@ unset($_SESSION['id']);
                 </div>
                 <div class="form-group">	
                     <div class="col-xs-6">
-                        <label for="Title"><h4>Password</h4></label>
+                        <label for="password"><h4>Password</h4></label>
                         <input type="password" class="form-control" name="password_1" id="password" placeholder="Enter Password">
                     </div>
                 </div>

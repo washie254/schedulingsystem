@@ -81,4 +81,39 @@
 		}
 	}
 
+
+	//rejister a specialist
+	if (isset($_POST['add_doc'])) {
+		$username = mysqli_real_escape_string($db, $_POST['username']);
+		$email = mysqli_real_escape_string($db,$_POST['email']);
+		$categoryid = mysqli_real_escape_string($db, $_POST['category']);
+		$password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
+		$password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
+
+		if (empty($email)) { array_push($errors, "Email is required"); }
+		if (empty($username)) { array_push($errors, "Username is required"); }
+		if (empty($password_1)) { array_push($errors, "Password is required"); }
+		if (empty($categoryid)) { array_push($errors, "couldnt identify the category"); }
+
+		if ($password_1 != $password_2) {
+			array_push($errors, "The two passwords do not match");
+		}
+
+		//Loook for the category name 
+		$result = $db->query("select * FROM categories WHERE id ='$categoryid'");
+		while ($row = $result->fetch_assoc()) {
+			// unset($category);
+			$category = $row['catname'];       
+		}
+
+		if (count($errors) == 0) {
+			$password = md5($password_1);//encrypt the password before saving in the database
+			$query = "INSERT INTO doctors (username, email, categoryid, categoryname, password) 
+					  VALUES('$username', '$email','$categoryid','$category','$password')";
+			mysqli_query($db, $query);
+
+			header('location: doctors.php');
+		}
+	}
+
 ?>
