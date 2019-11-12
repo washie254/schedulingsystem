@@ -16,7 +16,7 @@
 		$password = mysqli_real_escape_string($db, $_POST['password']);
 
 		if (empty($username)) {
-			array_push($errors, "Username is required");
+			array_push($errors, "Username is required"); //sasa
 		}
 		if (empty($password)) {
 			array_push($errors, "Password is required");
