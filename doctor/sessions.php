@@ -23,7 +23,7 @@ unset($_SESSION['id']);
 <!-- Basic Page Needs
 ================================================== -->
 <meta charset="utf-8">
-<title>Scheduling App</title>
+<title>Scheduling aplication</title>
 
 <!-- Mobile Specific Metas
 ================================================== -->
@@ -60,12 +60,13 @@ unset($_SESSION['id']);
 		<!-- Menu -->
 		<nav id="navigation" class="menu">
 			<ul id="responsive">
-				<li><a href="index.php" id="current">Home</a></li>
-				<li><a href="doctors.php">Specialist</a></li>
-				<li><a href="clients.php">Clients</a></li>
-				<li><a href="shedule.php">Schedule</a></li>
-				<li><a href="categories.php">Categories</a></li>
-				<li><a href="reports.php">Reports</a></li>
+
+				<li><a href="index.php">Home</a> </li>
+				<li><a href="bookings.php">Bookings</a></li>
+				<li><a href="sessions.php" id="current">Sessions</a></li>
+				<li><a href="profile.php">Profile</a></li>
+				
+				<!-- <li><a href="blog.html">Blog</a></li> -->
 			</ul>
 
 			<ul class="float-right">
@@ -97,13 +98,81 @@ unset($_SESSION['id']);
 <!-- Categories -->
 <div class="container">
 	<div class="sixteen columns">
-		<h3 class="margin-bottom-25">Popular Categories</h3>
-		<ul id="popular-categories">
-			<li><a href="reports.php"><i class="fa fa-line-chart trigger_popup_fricc"></i>Reports</a></li>
-			<li><a href="bookings.php"><i class="fa fa-building-o"></i> Bookings</a></li>
-			<li><a href="scheduled.php"><i class="fa fa-book"></i>Scheduled</a></li>
-			<li><a href="users.php"><i class="fa fa-users"></i> Users</a></li> 
-		</ul>
+		<h3 class="margin-bottom-25">Sessions Tracker</h3>
+		<p>Completed Sessions and progress will be here. Doctor's remarks will also be here to 
+		assist you to followup on the bookings</p>
+
+		<!-- <div class="card" style="width: 18rem;">
+			<img src="images/Counselling.jpg" class="card-img-top" alt="...">
+			<div class="card-body">
+				<h5 class="card-title">Counselling</h5>
+				<p class="card-text"><b>Doctors Remarks:</b><br>You need to watch on your Temparamental attribution and try not to let that take over you.</p>
+				<a href="#" class="btn btn-primary">View Info</a>
+			</div>
+		</div> -->
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="card">
+				<img src="images/Counselling.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">Counselling</h5>
+					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+					<a href="#" class="btn btn-primary">View Info</a>
+				</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="card">
+				<img src="images/Therapy.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">Therapy</h5>
+					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+					<a href="#" class="btn btn-primary">View Info</a>
+				</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="card">
+				<img src="images/Medical.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">Medical Checkup</h5>
+					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+					<a href="#" class="btn btn-primary">View Info</a>
+				</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="card">
+				<img src="images/Therapy.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">Therapy</h5>
+					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+					<a href="#" class="btn btn-primary">View Info</a>
+				</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="card">
+				<img src="images/therapy.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">Therapy</h5>
+					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+					<a href="#" class="btn btn-primary">View Info</a>
+				</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="card">
+				<img src="images/Counselling.jpg" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">Counselling</h5>
+					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+					<a href="#" class="btn btn-primary">View Info</a>
+				</div>
+				</div>
+			</div>
+			
+		</div>
 
 		<div class="clearfix"></div>
 		<div class="margin-top-30"></div>
@@ -124,12 +193,12 @@ unset($_SESSION['id']);
 			<div class="testimonials-slider">
 				  <ul class="slides">
 				    <li>
-				      <p> Scheduling system has lots of functions 
+				      <p> Every session conts
 				      <span>No 1 , nose</span></p>
 				    </li>
 
 				    <li>
-				      <p>Scheduling should not be taken lightly 
+				      <p>A problem shared is half solved
 				      <span>Med 10,42 </span></p>
 				    </li>
 				    
@@ -148,7 +217,7 @@ unset($_SESSION['id']);
 <!-- Infobox -->
 <div class="infobox">
 	<div class="container">
-		<div class="sixteen columns">Scheduling Reporting System Dashboard <a href="#">ADMIN</a></div>
+		<div class="sixteen columns">Sessions Dashboard </div>
 	</div>
 </div>
 

@@ -23,7 +23,7 @@ unset($_SESSION['id']);
 <!-- Basic Page Needs
 ================================================== -->
 <meta charset="utf-8">
-<title>Scheduling App</title>
+<title>Scheduling aplication</title>
 
 <!-- Mobile Specific Metas
 ================================================== -->
@@ -60,12 +60,13 @@ unset($_SESSION['id']);
 		<!-- Menu -->
 		<nav id="navigation" class="menu">
 			<ul id="responsive">
-				<li><a href="index.php" id="current">Home</a></li>
-				<li><a href="doctors.php">Specialist</a></li>
-				<li><a href="clients.php">Clients</a></li>
-				<li><a href="shedule.php">Schedule</a></li>
-				<li><a href="categories.php">Categories</a></li>
-				<li><a href="reports.php">Reports</a></li>
+
+				<li><a href="index.php" id="current">Home</a> </li>
+				<li><a href="bookings.php">Bookings</a></li>
+				<li><a href="sessions.php">Sessions</a></li>
+				<li><a href="profile.php">Profile</a></li>
+				
+				<!-- <li><a href="blog.html">Blog</a></li> -->
 			</ul>
 
 			<ul class="float-right">
@@ -79,17 +80,10 @@ unset($_SESSION['id']);
 		<div id="mobile-navigation">
 			<a href="#menu" class="menu-trigger"><i class="fa fa-reorder"></i> Menu</a>
 		</div>
-
 	</div>
 </div>
 </header>
 <div class="clearfix"></div>
-
-
-<!-- Banner
-================================================== -->
-
-
 
 <!-- Content
 ================================================== -->
@@ -99,10 +93,10 @@ unset($_SESSION['id']);
 	<div class="sixteen columns">
 		<h3 class="margin-bottom-25">Popular Categories</h3>
 		<ul id="popular-categories">
-			<li><a href="reports.php"><i class="fa fa-line-chart trigger_popup_fricc"></i>Reports</a></li>
-			<li><a href="bookings.php"><i class="fa fa-building-o"></i> Bookings</a></li>
-			<li><a href="scheduled.php"><i class="fa fa-book"></i>Scheduled</a></li>
-			<li><a href="users.php"><i class="fa fa-users"></i> Users</a></li> 
+			<li><a href="sessions.php"><i class="fa fa-line-chart trigger_popup_fricc"></i>Sessions Reports</a></li>
+			<li><a href="profile.php"><i class="fa fa-user"></i> My Account</a></li>
+			<li><a href="bookings.php"><i class="fa fa-building-o"></i>Bookings</a></li>
+			<li><a href="#"><i class="fa fa-laptop"></i> Telecommunications</a></li>  
 		</ul>
 
 		<div class="clearfix"></div>
@@ -114,8 +108,6 @@ unset($_SESSION['id']);
 </div>
 
 
-
-
 <!-- Testimonials -->
 <div id="testimonials">
 	<!-- Slider -->
@@ -124,7 +116,7 @@ unset($_SESSION['id']);
 			<div class="testimonials-slider">
 				  <ul class="slides">
 				    <li>
-				      <p> Scheduling system has lots of functions 
+				      <p> Scheduling reporting systemhas lota of funvtions 
 				      <span>No 1 , nose</span></p>
 				    </li>
 
@@ -148,7 +140,7 @@ unset($_SESSION['id']);
 <!-- Infobox -->
 <div class="infobox">
 	<div class="container">
-		<div class="sixteen columns">Scheduling Reporting System Dashboard <a href="#">ADMIN</a></div>
+		<div class="sixteen columns">SchedulingReporting System Dashboard <a href="#">ADMIN</a></div>
 	</div>
 </div>
 

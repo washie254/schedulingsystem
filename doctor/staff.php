@@ -1,6 +1,6 @@
 <?php 
-	
-session_start(); 
+include('server.php');	
+//session_start(); 
 
 if (!isset($_SESSION['username'])) {
 	$_SESSION['msg'] = "You must log in first";
@@ -23,7 +23,7 @@ unset($_SESSION['id']);
 <!-- Basic Page Needs
 ================================================== -->
 <meta charset="utf-8">
-<title>Scheduling App</title>
+<title>Emergency Ap</title>
 
 <!-- Mobile Specific Metas
 ================================================== -->
@@ -60,12 +60,13 @@ unset($_SESSION['id']);
 		<!-- Menu -->
 		<nav id="navigation" class="menu">
 			<ul id="responsive">
-				<li><a href="index.php" id="current">Home</a></li>
-				<li><a href="doctors.php">Specialist</a></li>
-				<li><a href="clients.php">Clients</a></li>
-				<li><a href="shedule.php">Schedule</a></li>
-				<li><a href="categories.php">Categories</a></li>
-				<li><a href="reports.php">Reports</a></li>
+
+				<li><a href="index.php">Home</a> </li>
+				<li><a href="emergencies.php">emergencies</a></li>
+                <li><a href="users.php">Users</a></li>
+				<li><a href="staff.php" id="current">Staff</a></li>
+				<li><a href="#">Reports</a></li>
+				<!-- <li><a href="blog.html">Blog</a></li> -->
 			</ul>
 
 			<ul class="float-right">
@@ -86,69 +87,41 @@ unset($_SESSION['id']);
 <div class="clearfix"></div>
 
 
-<!-- Banner
-================================================== -->
+<section class="section intro">
 
-
-
-<!-- Content
-================================================== -->
-
-<!-- Categories -->
-<div class="container">
-	<div class="sixteen columns">
-		<h3 class="margin-bottom-25">Popular Categories</h3>
-		<ul id="popular-categories">
-			<li><a href="reports.php"><i class="fa fa-line-chart trigger_popup_fricc"></i>Reports</a></li>
-			<li><a href="bookings.php"><i class="fa fa-building-o"></i> Bookings</a></li>
-			<li><a href="scheduled.php"><i class="fa fa-book"></i>Scheduled</a></li>
-			<li><a href="users.php"><i class="fa fa-users"></i> Users</a></li> 
-		</ul>
-
-		<div class="clearfix"></div>
-		<div class="margin-top-30"></div>
-
-		<a href="#" class="button centered">Other Functions</a>
-		<div class="margin-bottom-50"></div>
-	</div>
-</div>
-
-
-
-
-<!-- Testimonials -->
-<div id="testimonials">
-	<!-- Slider -->
 	<div class="container">
-		<div class="sixteen columns">
-			<div class="testimonials-slider">
-				  <ul class="slides">
-				    <li>
-				      <p> Scheduling system has lots of functions 
-				      <span>No 1 , nose</span></p>
-				    </li>
-
-				    <li>
-				      <p>Scheduling should not be taken lightly 
-				      <span>Med 10,42 </span></p>
-				    </li>
-				    
-				    <li>
-				      <p> Medical attention should always be administered with or without funding from the patients/victims
-				      <span>Tom Smith</span></p>
-				    </li>
-
-				  </ul>
-			</div>
+		<div style="padding: 6px 12px; border: 1px solid #ccc;">
+			You can add and View Staff members Here
+			<!-- <a href="#pending"><button type="button" class="btn btn-outline-secondary">Pending </button></a>
+			<a href="#approved"><button type="button" class="btn btn-outline-secondary">Approved </button></a>
+			<a href="#rejected"><button type="button" class="btn btn-outline-secondary">Rejected </button></a> -->
 		</div>
 	</div>
-</div>
+	<br>
+	
+	<div class="container" id="pending">
+		<div style="padding: 6px 12px; border: 1px solid #ccc;">
+			<h3>Registered Staff Members</h3> 
+			<p>The following are the registered staff Members</p> 
+		</div>
+	</div>
 
+	<br>
+	<div class="container" id="rejected">
+		<div style="padding: 6px 12px; border: 1px solid #ccc;">
+			<h3>Add Staff Members</h3> 
+			<p>Form for adding staff members will be here </p> 
 
+		</div>
+	</div>
+
+</section>
+<br>
+<div class="clearfix"></div>
 <!-- Infobox -->
 <div class="infobox">
 	<div class="container">
-		<div class="sixteen columns">Scheduling Reporting System Dashboard <a href="#">ADMIN</a></div>
+		<div class="sixteen columns">Emergency Reporting System Dashboard <a href="#">ADMIN</a></div>
 	</div>
 </div>
 
@@ -164,7 +137,7 @@ unset($_SESSION['id']);
 
 		<div class="seven columns">
 			<h4>About</h4>
-			<p>Scheduling system is meant ot assist the inhabitants of the County to have access to medical 
+			<p>Emergency reporting system is meant ot assist the inhabitants of the County to have access to emergency 
 				services offered at the falcility .</p>
 			<a href="#" class="button">Get Started</a>
 		</div>
@@ -173,7 +146,7 @@ unset($_SESSION['id']);
 			<h4>Company</h4>
 			<ul class="footer-links">
 				<li><a href="users.php">users</a></li>
-				<li><a href="#">someother</a></li>
+				<li><a href="emergencies.php">Emergencies</a></li>
 				<li><a href="index.php">Home</a></li>
 			</ul>
 		</div>
@@ -211,7 +184,7 @@ unset($_SESSION['id']);
 					<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
 					<li><a class="linkedin" href="#"><i class="icon-linkedin"></i></a></li>
 				</ul>
-				<div class="copyrights">©  Copyright 2019 by <a href="#">SonnieMugo</a>. All Rights Reserved.</div>
+				<div class="copyrights">©  Copyright 2019 by <a href="#">Washington</a>. All Rights Reserved.</div>
 			</div>
 		</div>
 	</div>
