@@ -100,9 +100,9 @@ unset($_SESSION['id']);
 		<h3 class="margin-bottom-25">Popular Categories</h3>
 		<ul id="popular-categories">
 			<li><a href="reports.php"><i class="fa fa-line-chart trigger_popup_fricc"></i>Reports</a></li>
-			<li><a href="bookings.php"><i class="fa fa-building-o"></i> Bookings</a></li>
-			<li><a href="scheduled.php"><i class="fa fa-book"></i>Scheduled</a></li>
-			<li><a href="users.php"><i class="fa fa-users"></i> Users</a></li> 
+			<li><a href="doctors.php"><i class="fa fa-building"></i> Specialist</a></li>
+			<li><a href="schedule.php"><i class="fa fa-book"></i>Schedules</a></li>
+			<li><a href="users.php"><i class="fa fa-users"></i> Clients</a></li> 
 		</ul>
 
 		<div class="clearfix"></div>
