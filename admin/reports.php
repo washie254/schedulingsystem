@@ -59,14 +59,14 @@ unset($_SESSION['id']);
 
 		<!-- Menu -->
 		<nav id="navigation" class="menu">
-			<ul id="responsive">
 
-				<li><a href="index.php">Home</a> </li>
-				<li><a href="bookings.php">Bookings</a></li>
-				<li><a href="scheduled.php">Sessions</a></li>
-				<li><a href="users.php" id="current">Users</a></li>
-				<li><a href="reports.php">Reports</a></li>
-			<!-- <li><a href="blog.html">Blog</a></li> -->
+			<ul id="responsive">
+				<li><a href="index.php">Home</a></li>
+				<li><a href="doctors.php">Specialist</a></li>
+				<li><a href="clients.php">Clients</a></li>
+				<li><a href="schedule.php">Schedule</a></li>
+				<li><a href="categories.php">Categories</a></li>
+				<li><a href="reports.php" id="current">Reports</a></li>
 			</ul>
 
 			<ul class="float-right">

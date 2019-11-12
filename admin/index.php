@@ -63,7 +63,7 @@ unset($_SESSION['id']);
 				<li><a href="index.php" id="current">Home</a></li>
 				<li><a href="doctors.php">Specialist</a></li>
 				<li><a href="clients.php">Clients</a></li>
-				<li><a href="shedule.php">Schedule</a></li>
+				<li><a href="schedule.php">Schedule</a></li>
 				<li><a href="categories.php">Categories</a></li>
 				<li><a href="reports.php">Reports</a></li>
 			</ul>
