@@ -115,8 +115,18 @@ unset($_SESSION['id']);
 </style>
 
 <section class="section intro">
+    <div class="container" id="register">
+        <div  style="padding: 6px 12px; border: 1px solid #ccc;">
+         You can add a specialist as well as view specialist already in the system
+         <br>
+         <b>Quick Links:</b>
+            <a href="#register"><button type="button" class="btn btn-primary">Register</button></a>
+            <a href="#Registered"><button type="button" class="btn btn-primary">View Registered</button></a>
+        </div>
+    </div>
 
-    <div class="container">
+    <br>
+    <div class="container" id="register">
         <div  style="padding: 6px 12px; border: 1px solid #ccc;">
 
             <h3> Add a Specialist</h3>
@@ -182,6 +192,53 @@ unset($_SESSION['id']);
         
         </div>
     </div>
+
+    <br>
+    <div class="container" id="Registered">
+        <div  style="padding: 6px 12px; border: 1px solid #ccc;">
+
+            <h3> Registered Specialists</h3>
+            <p>Fill in the following details to as a doctor or specialist </p>
+            <table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+					<th scope="col"><b>Doc#</b></th>
+					<th scope="col"><b>Username</b></th>
+					<th scope="col"><b>Other Names</b></th>
+					<th scope="col"><b>Email</b></th>
+					<th scope="col"><b>Tel No</b></th>
+					<th scope="col"><b>Category</b></th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- [ LOOP THE REGISTERED AGENTS ] -->
+					<?php
+
+
+					$sql = "SELECT * FROM doctors  ORDER BY id ";
+					$result = mysqli_query($db, $sql);
+					while($row = mysqli_fetch_array($result, MYSQLI_NUM))
+					{	
+					
+						echo '<tr>';
+							echo '<td>'.$row[0].'</td> '; //  ID 
+							echo '<td>'.$row[1].'</td> '; //  ID 
+							echo '<td>'.$row[2]." ".$row[3].'</td> '; //Title
+							echo '<td>'.$row[5].'</td> '; //Category
+							echo '<td>'.$row[4].'</td> '; //Description
+							echo '<td>'.$row[7].'</td> '; //Date
+						echo '</tr>';
+					}
+					?>
+				</tbody>
+			</table>
+        </div>
+    </div>
+
+
+
+
+
 </section>
 
 

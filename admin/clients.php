@@ -1,6 +1,6 @@
 <?php 
-	
-session_start(); 
+	include('server.php');
+// session_start(); 
 
 if (!isset($_SESSION['username'])) {
 	$_SESSION['msg'] = "You must log in first";
@@ -61,8 +61,8 @@ unset($_SESSION['id']);
 		<nav id="navigation" class="menu">
 			<ul id="responsive">
 				<li><a href="index.php">Home</a></li>
-				<li><a href="doctors.php">Specialist</a></li>
-				<li><a href="clients.php" id="current">Clients</a></li>
+				<li><a href="doctors.php" id="current">Specialist</a></li>
+				<li><a href="clients.php">Clients</a></li>
 				<li><a href="schedule.php">Schedule</a></li>
 				<li><a href="categories.php">Categories</a></li>
 				<li><a href="reports.php">Reports</a></li>
@@ -97,60 +97,150 @@ unset($_SESSION['id']);
 <!-- Categories -->
 <div class="container">
 	<div class="sixteen columns">
-		<h3 class="margin-bottom-25">Popular Categories</h3>
-		<ul id="popular-categories">
-			<li><a href="reports.php"><i class="fa fa-line-chart trigger_popup_fricc"></i>Reports</a></li>
-			<li><a href="bookings.php"><i class="fa fa-building-o"></i> Bookings</a></li>
-			<li><a href="scheduled.php"><i class="fa fa-book"></i>Scheduled</a></li>
-			<li><a href="users.php"><i class="fa fa-users"></i> Users</a></li> 
-		</ul>
-
-		<div class="clearfix"></div>
-		<div class="margin-top-30"></div>
-
-		<a href="#" class="button centered">Other Functions</a>
-		<div class="margin-bottom-50"></div>
+		<h3 class="margin-bottom-25">doctors and Specialists</h3>
+	    <p> Her we will have the specialist registered in the system. you can also add more specialists in the system</p>
 	</div>
 </div>
+<style>
+    .error {
+        width: 92%; 
+        margin: 0px auto; 
+        padding: 10px; 
+        border: 1px solid #a94442; 
+        color: #a94442; 
+        background: #f2dede; 
+        border-radius: 5px; 
+        text-align: left;
+    }
+</style>
+
+<section class="section intro">
+    <div class="container" id="register">
+        <div  style="padding: 6px 12px; border: 1px solid #ccc;">
+         You can add a specialist as well as view specialist already in the system
+         <br>
+         <b>Quick Links:</b>
+            <a href="#register"><button type="button" class="btn btn-primary">Register</button></a>
+            <a href="#Registered"><button type="button" class="btn btn-primary">View Registered</button></a>
+        </div>
+    </div>
+
+    <br>
+    <div class="container" id="register">
+        <div  style="padding: 6px 12px; border: 1px solid #ccc;">
+
+            <h3> Add a Specialist</h3>
+            <p>Fill in the following details to as a doctor or specialist </p>
+
+            <form class="form" action="doctors.php" method="post">
+                <?php include('errors.php');?>
+<!-- 
+                <input type="text" id="uid" name="userid" style="opacity: 0;" value="<?=$uid?>"/> -->
+            
+            
+                <div class="form-group">	
+                    <div class="col-xs-6">
+                        <label for="username"><h4>Username</h4></label>
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Specialist Username">
+                    </div>
+                </div>
+                <div class="form-group">	
+                    <div class="col-xs-6">
+                        <label for="email"><h4>Email</h4></label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Add email address">
+                    </div>
+                </div>
+
+                <div class="form-group">	
+                    <div class="col-xs-6">
+                        <label for="category"><h4>Category</h4></label>
+                        <?php
+                                        
+                            $result = $db->query("select id, catname FROM categories");
+                            echo "<select  class='form-control' name='category'>";
+                                while ($row = $result->fetch_assoc()) {
+                                unset($id, $name);
+                                $id = $row['id'];
+                                $name = $row['catname']; 
+                                echo '<option value="'.$id.'">'.$name.'</option>';      
+                                }
+                            echo "</select>";
+                        ?>
+                    </div>
+                </div>
+                <div class="form-group">	
+                    <div class="col-xs-6">
+                        <label for="password"><h4>Password</h4></label>
+                        <input type="password" class="form-control" name="password_1" id="password" placeholder="Enter Password">
+                    </div>
+                </div>
+                <div class="form-group">	
+                    <div class="col-xs-6">
+                        <label for="Title"><h4>Confirm Password</h4></label>
+                        <input type="password" class="form-control" name="password_2" id="confirmpassword" placeholder="Confirm Passord">
+                    </div>
+                </div>
+
+               
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <br>
+                        <button class="btn btn-lg btn-success" style="width:98%;" type="submit" name="add_doc"><i class="glyphicon glyphicon-ok-sign"></i> Add Specialist</button>
+                    </div>
+                </div>
+            </form>
+        
+        </div>
+    </div>
+
+    <br>
+    <div class="container" id="Registered">
+        <div  style="padding: 6px 12px; border: 1px solid #ccc;">
+
+            <h3> Registered Specialists</h3>
+            <p>Fill in the following details to as a doctor or specialist </p>
+            <table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+					<th scope="col"><b>Doc#</b></th>
+					<th scope="col"><b>Username</b></th>
+					<th scope="col"><b>Other Names</b></th>
+					<th scope="col"><b>Email</b></th>
+					<th scope="col"><b>Tel No</b></th>
+					<th scope="col"><b>Category</b></th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- [ LOOP THE REGISTERED AGENTS ] -->
+					<?php
+
+
+					$sql = "SELECT * FROM doctors  ORDER BY id ";
+					$result = mysqli_query($db, $sql);
+					while($row = mysqli_fetch_array($result, MYSQLI_NUM))
+					{	
+					
+						echo '<tr>';
+							echo '<td>'.$row[0].'</td> '; //  ID 
+							echo '<td>'.$row[1].'</td> '; //  ID 
+							echo '<td>'.$row[2]." ".$row[3].'</td> '; //Title
+							echo '<td>'.$row[5].'</td> '; //Category
+							echo '<td>'.$row[4].'</td> '; //Description
+							echo '<td>'.$row[7].'</td> '; //Date
+						echo '</tr>';
+					}
+					?>
+				</tbody>
+			</table>
+        </div>
+    </div>
 
 
 
 
-<!-- Testimonials -->
-<div id="testimonials">
-	<!-- Slider -->
-	<div class="container">
-		<div class="sixteen columns">
-			<div class="testimonials-slider">
-				  <ul class="slides">
-				    <li>
-				      <p> Scheduling system has lots of functions 
-				      <span>No 1 , nose</span></p>
-				    </li>
 
-				    <li>
-				      <p>Scheduling should not be taken lightly 
-				      <span>Med 10,42 </span></p>
-				    </li>
-				    
-				    <li>
-				      <p> Medical attention should always be administered with or without funding from the patients/victims
-				      <span>Tom Smith</span></p>
-				    </li>
+</section>
 
-				  </ul>
-			</div>
-		</div>
-	</div>
-</div>
-
-
-<!-- Infobox -->
-<div class="infobox">
-	<div class="container">
-		<div class="sixteen columns">Scheduling Reporting System Dashboard <a href="#">ADMIN</a></div>
-	</div>
-</div>
 
 
 
@@ -200,21 +290,7 @@ unset($_SESSION['id']);
 
 	</div>
 
-	<!-- Bottom -->
-	<div class="container">
-		<div class="footer-bottom">
-			<div class="sixteen columns">
-				<h4>Follow Us</h4>
-				<ul class="social-icons">
-					<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
-					<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
-					<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
-					<li><a class="linkedin" href="#"><i class="icon-linkedin"></i></a></li>
-				</ul>
-				<div class="copyrights">©  Copyright 2019 by <a href="#">SonnieMugo</a>. All Rights Reserved.</div>
-			</div>
-		</div>
-	</div>
+
 
 </div>
 
