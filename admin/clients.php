@@ -61,8 +61,8 @@ unset($_SESSION['id']);
 		<nav id="navigation" class="menu">
 			<ul id="responsive">
 				<li><a href="index.php">Home</a></li>
-				<li><a href="doctors.php" id="current">Specialist</a></li>
-				<li><a href="clients.php">Clients</a></li>
+				<li><a href="doctors.php">Specialist</a></li>
+				<li><a href="clients.php" id="current">Clients</a></li>
 				<li><a href="schedule.php">Schedule</a></li>
 				<li><a href="categories.php">Categories</a></li>
 				<li><a href="reports.php">Reports</a></li>
@@ -97,8 +97,8 @@ unset($_SESSION['id']);
 <!-- Categories -->
 <div class="container">
 	<div class="sixteen columns">
-		<h3 class="margin-bottom-25">doctors and Specialists</h3>
-	    <p> Her we will have the specialist registered in the system. you can also add more specialists in the system</p>
+		<h3 class="margin-bottom-25">Patients | Clients</h3>
+	    <p>this area wil entail Clients or rather patients in the system</p>
 	</div>
 </div>
 <style>
@@ -117,7 +117,7 @@ unset($_SESSION['id']);
 <section class="section intro">
     <div class="container" id="register">
         <div  style="padding: 6px 12px; border: 1px solid #ccc;">
-         You can add a specialist as well as view specialist already in the system
+         You can register a patient and allocate them later to the specialists.
          <br>
          <b>Quick Links:</b>
             <a href="#register"><button type="button" class="btn btn-primary">Register</button></a>
@@ -129,21 +129,40 @@ unset($_SESSION['id']);
     <div class="container" id="register">
         <div  style="padding: 6px 12px; border: 1px solid #ccc;">
 
-            <h3> Add a Specialist</h3>
+            <h3>Register A patient</h3>
             <p>Fill in the following details to as a doctor or specialist </p>
 
-            <form class="form" action="doctors.php" method="post">
+            <form class="form" action="clients.php" method="post">
                 <?php include('errors.php');?>
-<!-- 
-                <input type="text" id="uid" name="userid" style="opacity: 0;" value="<?=$uid?>"/> -->
-            
-            
+
                 <div class="form-group">	
                     <div class="col-xs-6">
                         <label for="username"><h4>Username</h4></label>
-                        <input type="text" class="form-control" name="username" id="username" placeholder="Specialist Username">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="clients Username">
                     </div>
                 </div>
+                
+                <div class="form-group">	
+                    <div class="col-xs-6">
+                        <label for="username"><h4>Firstname</h4></label>
+                        <input type="text" class="form-control" name="fname" id="fname" placeholder="Client's Firsname">
+                    </div>
+                </div>  
+
+                <div class="form-group">	
+                    <div class="col-xs-6">
+                        <label for="username"><h4>Last Name</h4></label>
+                        <input type="text" class="form-control" name="lname" id="lname" placeholder="Client's second name">
+                    </div>
+                </div>
+                
+                <div class="form-group">	
+                    <div class="col-xs-6">
+                        <label for="username"><h4>ID Number</h4></label>
+                        <input type="number" class="form-control" name="idnumber" id="idnumber" placeholder="clients id number">
+                    </div>
+                </div>                
+
                 <div class="form-group">	
                     <div class="col-xs-6">
                         <label for="email"><h4>Email</h4></label>
@@ -151,23 +170,6 @@ unset($_SESSION['id']);
                     </div>
                 </div>
 
-                <div class="form-group">	
-                    <div class="col-xs-6">
-                        <label for="category"><h4>Category</h4></label>
-                        <?php
-                                        
-                            $result = $db->query("select id, catname FROM categories");
-                            echo "<select  class='form-control' name='category'>";
-                                while ($row = $result->fetch_assoc()) {
-                                unset($id, $name);
-                                $id = $row['id'];
-                                $name = $row['catname']; 
-                                echo '<option value="'.$id.'">'.$name.'</option>';      
-                                }
-                            echo "</select>";
-                        ?>
-                    </div>
-                </div>
                 <div class="form-group">	
                     <div class="col-xs-6">
                         <label for="password"><h4>Password</h4></label>
@@ -185,7 +187,7 @@ unset($_SESSION['id']);
                 <div class="form-group">
                     <div class="col-xs-12">
                         <br>
-                        <button class="btn btn-lg btn-success" style="width:98%;" type="submit" name="add_doc"><i class="glyphicon glyphicon-ok-sign"></i> Add Specialist</button>
+                        <button class="btn btn-lg btn-success" style="width:98%;" type="submit" name="add_patient"><i class="glyphicon glyphicon-ok-sign"></i> Add Client</button>
                     </div>
                 </div>
             </form>
@@ -197,17 +199,18 @@ unset($_SESSION['id']);
     <div class="container" id="Registered">
         <div  style="padding: 6px 12px; border: 1px solid #ccc;">
 
-            <h3> Registered Specialists</h3>
-            <p>Fill in the following details to as a doctor or specialist </p>
+            <h3> Registered Clients</h3>
+            <p> the following are the registered users in the system </p>
             <table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-					<th scope="col"><b>Doc#</b></th>
+					<th scope="col"><b>ID#</b></th>
 					<th scope="col"><b>Username</b></th>
 					<th scope="col"><b>Other Names</b></th>
 					<th scope="col"><b>Email</b></th>
 					<th scope="col"><b>Tel No</b></th>
-					<th scope="col"><b>Category</b></th>
+					<th scope="col"><b>Id Number</b></th>
+                    <th scope="col"><b>Date Registered</b></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -215,7 +218,7 @@ unset($_SESSION['id']);
 					<?php
 
 
-					$sql = "SELECT * FROM doctors  ORDER BY id ";
+					$sql = "SELECT * FROM users  ORDER BY id ";
 					$result = mysqli_query($db, $sql);
 					while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 					{	
@@ -224,9 +227,10 @@ unset($_SESSION['id']);
 							echo '<td>'.$row[0].'</td> '; //  ID 
 							echo '<td>'.$row[1].'</td> '; //  ID 
 							echo '<td>'.$row[2]." ".$row[3].'</td> '; //Title
-							echo '<td>'.$row[5].'</td> '; //Category
-							echo '<td>'.$row[4].'</td> '; //Description
-							echo '<td>'.$row[7].'</td> '; //Date
+							echo '<td>'.$row[9].'</td> '; //Category
+							echo '<td>'.$row[5].'</td> '; //Description
+                            echo '<td>'.$row[4].'</td> '; //Date
+                            echo '<td>'.$row[11].'</td> '; //Date
 						echo '</tr>';
 					}
 					?>

@@ -5,6 +5,7 @@
 	$email    = "";
 	$errors = array(); 
 	$_SESSION['success'] = "";
+	$cdate = date("Y-m-d");
 
 	// connect to database
 	$db = mysqli_connect('localhost', 'root', '', 'dkut_scheduling_system');
@@ -113,6 +114,38 @@
 			mysqli_query($db, $query);
 
 			header('location: doctors.php');
+		}
+	}
+
+	//rejister a user / client/ patient
+	if (isset($_POST['add_patient'])) {
+		$username = mysqli_real_escape_string($db, $_POST['username']);
+		$email = mysqli_real_escape_string($db,$_POST['email']);
+		$idnumber = mysqli_real_escape_string($db, $_POST['idnumber']);
+		$fname = mysqli_real_escape_string($db, $_POST['fname']);
+		$lname = mysqli_real_escape_string($db, $_POST['lname']);
+		$password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
+		$password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
+
+		if (empty($fname)) { array_push($errors, "Enter First name of client"); }
+		if (empty($lname)) { array_push($errors, "Client's Second name required"); }
+		if (empty($idnumber)) { array_push($errors, "add client's id number "); }
+		if (empty($email)) { array_push($errors, "Email is required"); }
+		if (empty($username)) { array_push($errors, "Username is required"); }
+		if (empty($password_1)) { array_push($errors, "Password is required"); }
+
+		if ($password_1 != $password_2) {
+			array_push($errors, "The two passwords do not match");
+		}
+
+	
+		if (count($errors) == 0) {
+			$password = md5($password_1);//encrypt the password before saving in the database
+			$query = "INSERT INTO users (username, fname, lname, idnumber, email, password, dateregistered) 
+					  VALUES('$username','$fname','$lname','$idnumber', '$email','$password', '$cdate')";
+			mysqli_query($db, $query);
+
+			header('location: clients.php');
 		}
 	}
 
