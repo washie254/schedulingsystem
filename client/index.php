@@ -92,8 +92,8 @@ unset($_SESSION['id']);
 		<ul id="popular-categories">
 			<li><a href="sessions.php"><i class="fa fa-line-chart trigger_popup_fricc"></i>Sessions Reports</a></li>
 			<li><a href="profile.php"><i class="fa fa-user"></i> My Account</a></li>
-			<li><a href="bookings.php"><i class="fa fa-building-o"></i>Bookings</a></li>
-			<li><a href="#"><i class="fa fa-laptop"></i> Telecommunications</a></li>  
+			<li><a href="sessions.php"><i class="fa fa-book"></i>Sessions</a></li>
+			<li><a href="appointments.php"><i class="fa fa-laptop"></i> Appoinments</a></li>  
 		</ul>
 
 		<div class="clearfix"></div>

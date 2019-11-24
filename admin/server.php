@@ -185,4 +185,14 @@
 			header('location: schedule.php');
 		}
 	}
+
+	if (isset($_POST['add_field'])) {
+		$fdname = mysqli_real_escape_string($db, $_POST['fieldname']);
+		$fdesc = mysqli_real_escape_string($db,$_POST['fielddescription']);
+		
+		$sql= "INSERT INTO categories (catname, catdescription) VALUES ('$fdname','$fdesc')";
+		mysqli_query($db, $sql);
+
+		header('location: categories.php');
+	}
 ?>

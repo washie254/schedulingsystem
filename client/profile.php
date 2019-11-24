@@ -92,7 +92,7 @@ unset($_SESSION['id']);
 </header>
 
 <!-- ====================================MAPS -->
-<script>
+<!-- <script>
     if(!navigator.geolocation){
     alert('Your Browser does not support HTML5 Geo Location. Please Use Newer Version Browsers');
     }
@@ -108,7 +108,7 @@ unset($_SESSION['id']);
     function error(err){
     alert('ERROR(' + err.code + '): ' + err.message);
     }
-</script>
+</script> -->
 <!-- ====================================MAPS -->
 
 

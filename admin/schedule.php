@@ -166,7 +166,7 @@ unset($_SESSION['id']);
 			</thead>
 			<tbody>
 				<?php
-				$sql = "SELECT * FROM schedules ORDER BY date_scheduled";
+				$sql = "SELECT * FROM schedules ORDER BY status,date_scheduled";
 				$result = mysqli_query($db, $sql);
 				while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 				{	

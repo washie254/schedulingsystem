@@ -1,7 +1,5 @@
 <?php 
-	
-session_start(); 
-
+include('server.php');
 if (!isset($_SESSION['username'])) {
 	$_SESSION['msg'] = "You must log in first";
 	header('location: login.php');
@@ -13,6 +11,14 @@ unset($_SESSION['username']);
 unset($_SESSION['id']);
 	header("location: login.php");
 }
+
+$doc = $_SESSION["username"];
+$sql = "SELECT * FROM doctors where username='$doc'";
+$result = mysqli_query($db, $sql);
+while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
+    $docid = $row[0];
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -83,100 +89,67 @@ unset($_SESSION['id']);
 </header>
 <div class="clearfix"></div>
 
-
-<!-- Banner
-================================================== -->
-
-
-
 <!-- Content
 ================================================== -->
 
 <!-- Categories -->
 <div class="container">
-	<div class="sixteen columns">
-		<h3 class="margin-bottom-25">Sessions Tracker</h3>
-		<p>Completed Sessions and progress will be here. Doctor's remarks will also be here to 
-		assist you to followup on the bookings</p>
+<section class="section intro">
 
-		<!-- <div class="card" style="width: 18rem;">
-			<img src="images/Counselling.jpg" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">Counselling</h5>
-				<p class="card-text"><b>Doctors Remarks:</b><br>You need to watch on your Temparamental attribution and try not to let that take over you.</p>
-				<a href="#" class="btn btn-primary">View Info</a>
-			</div>
-		</div> -->
-		<div class="row">
-			<div class="col-sm-4">
-				<div class="card">
-				<img src="images/Counselling.jpg" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Counselling</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="#" class="btn btn-primary">View Info</a>
-				</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="card">
-				<img src="images/Therapy.jpg" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Therapy</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="#" class="btn btn-primary">View Info</a>
-				</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="card">
-				<img src="images/Medical.jpg" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Medical Checkup</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="#" class="btn btn-primary">View Info</a>
-				</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="card">
-				<img src="images/Therapy.jpg" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Therapy</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="#" class="btn btn-primary">View Info</a>
-				</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="card">
-				<img src="images/therapy.jpg" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Therapy</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="#" class="btn btn-primary">View Info</a>
-				</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="card">
-				<img src="images/Counselling.jpg" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Counselling</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="#" class="btn btn-primary">View Info</a>
-				</div>
-				</div>
-			</div>
-			
-		</div>
-
-		<div class="clearfix"></div>
-		<div class="margin-top-30"></div>
-
-		<a href="#" class="button centered">Other Functions</a>
-		<div class="margin-bottom-50"></div>
+<div class="container">
+	<div style="padding: 6px 12px; border: 1px solid #ccc;">
+	  The following are the Statistsics of schedules allocated by the administrator <br>
+		
 	</div>
+</div>
+<br>
+
+<br>
+<div class="container" id="approved">
+	<div style="padding: 6px 12px; border: 1px solid #ccc;">
+		<h3>Scheduled Patients</h3> 
+		<p> The following are the completed Sessions</p> 
+	    <table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+				<th scope="col"><b>Schid#</b></th>
+				<th scope="col"><b>Pat. Id</b></th>
+				<th scope="col"><b>Pat. Names</b></th>
+				<th scope="col"><b>Doc. ID</b></th>
+				<th scope="col"><b>Category</b></th>
+				<th scope="col"><b>Allocated Day</b></th>
+				<th scope="col"><b>description</b></th>
+				<th scope="col"><b>status</b></th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+				$sql = "SELECT * FROM schedules WHERE doc_id='$docid' AND status ='COMPLETED' ORDER BY date_scheduled";
+				$result = mysqli_query($db, $sql);
+				while($row = mysqli_fetch_array($result, MYSQLI_NUM))
+				{	
+					$day = $row[4]." at &nbsp;".$row[5];
+					echo '<tr>';
+						echo '<td>'.$row[0].'</td> '; //  ID 
+						echo '<td>'.$row[1].'</td> '; //  ID 
+						echo '<td>'.$row[2].'</td> '; //Title
+						echo '<td>'.$row[3].'</td> '; //Category
+
+						echo '<td>'.$row[8].'</td> '; //Description
+						echo '<td>'.$day.'</td> '; //Status
+						echo '<td>'.$row[7].'</td> '; //Status
+						echo '<td>'.$row[6].'</td> '; //Status
+						
+					echo '</tr>';
+				}
+				?>
+			</tbody>
+		</table>
+</div>
+<br>
+
+</section>
 </div>
 
 

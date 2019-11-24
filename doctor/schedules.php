@@ -182,7 +182,7 @@ while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
 			<tbody>
 				<?php
                 $leo = date("Y-m-d");
-				$sql = "SELECT * FROM schedules WHERE doc_id='$docid'AND status !='PENDING' and date_scheduled='$leo' ORDER BY time_scheduled";
+				$sql = "SELECT * FROM schedules WHERE doc_id='$docid'AND status ='SCHEDULED TIME' and date_scheduled='$leo' ORDER BY time_scheduled";
 				$result = mysqli_query($db, $sql);
 				while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 				{	
@@ -198,7 +198,7 @@ while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
 						echo '<td>'.$row[7].'</td> '; //Status
                         echo '<td>'.$row[6].'</td> '; //Status
                         echo '<td>
-								<a href="initiate.php?id='.$row[0].'"><strong><button type="button" class="btn btn-primary">Initiate</button>
+								<a href="initiate.php?id='.$row[0].'"><strong><button type="button" class="btn btn-primary">file session</button>
 							  </td>';
 					echo '</tr>';
 				}
@@ -219,13 +219,12 @@ while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
 				<th scope="col"><b>Allocated Day</b></th>
 				<th scope="col"><b>description</b></th>
 				<th scope="col"><b>status</b></th>
-                <th scope="col"><b>Launch Session</b></th>
 
 				</tr>
 			</thead>
 			<tbody>
 				<?php
-				$sql = "SELECT * FROM schedules WHERE doc_id='$docid' AND status !='PENDING' ORDER BY date_scheduled";
+				$sql = "SELECT * FROM schedules WHERE doc_id='$docid' AND status ='SCHEDULED TIME' ORDER BY date_scheduled";
 				$result = mysqli_query($db, $sql);
 				while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 				{	
@@ -239,10 +238,8 @@ while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
 						echo '<td>'.$row[8].'</td> '; //Description
 						echo '<td>'.$day.'</td> '; //Status
 						echo '<td>'.$row[7].'</td> '; //Status
-                        echo '<td>'.$row[6].'</td> '; //Status
-                        echo '<td>
-								<a href="initiate.php?id='.$row[0].'"><strong><button type="button" class="btn btn-primary">Initiate</button>
-							  </td>';
+						echo '<td>'.$row[6].'</td> '; //Status
+						
 					echo '</tr>';
 				}
 				?>

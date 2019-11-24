@@ -126,7 +126,8 @@ while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
 			</thead>
 			<tbody>
 			<?php
-				$sql = "SELECT * FROM schedules WHERE doc_id='$docid'";
+				//$sql = "SELECT * DISTINCT pat_id FROM schedules WHERE doc_id='$docid'";
+				$sql = "SELECT * FROM schedules  WHERE pat_id in (SELECT pat_id FROM schedules GROUP BY pat_id HAVING COUNT(pat_id)=1)";
 				$result = mysqli_query($db, $sql);
 				while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 				{	
@@ -135,7 +136,7 @@ while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
 						echo '<td>'.$row[1].'</td> '; //  ID 
 						echo '<td>'.$row[2].'</td> '; //  ID 
 						echo '<td>
-								<a href="viewpatprofile.php?id='.$row[1].'"><strong><button type="button" class="btn btn-primary">View Patient details</button>
+								<a href="viewpatprofile.php?id='.$row[1].'"><strong><button type="button" class="btn btn-secondary">View Patient details</button>
 							  </td>';
 					echo '</tr>';
 				}
@@ -147,39 +148,6 @@ while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
 </div>
 
 <br>
-<div class="container" id="approved">
-	<div style="padding: 6px 12px; border: 1px solid #ccc;">
-    <h3>All Patients</h3> 
-		<p>the following are the deails of the registered patients that can be scheduled</p>  
-
-		<table class="table table-bordered table-striped">
-			<thead>
-				<tr>
-				<th scope="col"><b>pat ID</b></th>
-				<th scope="col"><b>names</b></th>
-				<th scope="col"><b>View</b></th>
-				</tr>
-			</thead>
-			<tbody>
-			<?php
-				$sql = "SELECT * FROM schedules WHERE doc_id='$docid'";
-				$result = mysqli_query($db, $sql);
-				while($row = mysqli_fetch_array($result, MYSQLI_NUM))
-				{	
-				
-					echo '<tr>';
-						echo '<td>'.$row[1].'</td> '; //  ID 
-						echo '<td>'.$row[2].'</td> '; //  ID 
-						echo '<td>
-								<a href="viewpatprofile.php?id='.$row[1].'"><strong><button type="button" class="btn btn-primary">View Patient details</button>
-							  </td>';
-					echo '</tr>';
-				}
-				?>
-			</tbody>
-		</table>
-</div>
-
 </section>
 </div>
 

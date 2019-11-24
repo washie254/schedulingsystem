@@ -150,4 +150,17 @@
 			header('location: bookings.php');
 		}
 	}
+
+	if(ISSET($_POST['givefeedback'])){
+		$feedback = mysqli_real_escape_string($db, $_POST['feed']);
+		$sid = mysqli_real_escape_string($db, $_POST['sid']);
+
+		$query = "UPDATE sessions 
+					SET patremarks='$feedback'
+					WHERE 
+					id ='$sid'";
+		mysqli_query($db, $query);
+
+		header('location: sessions.php');
+	}
 ?>

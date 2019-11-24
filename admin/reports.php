@@ -91,10 +91,15 @@ unset($_SESSION['id']);
 
 	<div class="container">
 		<div style="padding: 6px 12px; border: 1px solid #ccc;">
+		 Here are general reports and some downloadable reports.<br>
+		 <a href="pdf/schedules.php" target=0><button class="btn btn-success"><i class="fa fa-download"></i> Schedules</button></a>
+		 <a href="pdf/completedsch.php" target=0><button class="btn btn-primary"><i class="fa fa-download"></i> completed Schedules</button></a>
+		 <a href="pdf/sessions.php" target=0><button class="btn btn-secondary"><i class="fa fa-download"></i> sessions</button></a><br>
+		 <br>
 			QUICK LINKS:   
-			<a href="#pending"><button type="button" class="btn btn-outline-secondary">Pending </button></a>
-			<a href="#approved"><button type="button" class="btn btn-outline-secondary">Approved </button></a>
-			<a href="#rejected"><button type="button" class="btn btn-outline-secondary">Rejected </button></a>
+			<a href="#pending"><button type="button" class="btn btn-outline-secondary">Users vs #of schedules </button></a>
+			<a href="#approved"><button type="button" class="btn btn-outline-secondary">ALL USERS </button></a>
+			<!-- <a href="#rejected"><button type="button" class="btn btn-outline-secondary">All Registered Users </button></a> -->
 		</div>
 	</div>
 	<br>
@@ -140,10 +145,12 @@ unset($_SESSION['id']);
 	</div>
 
 	<br>
-	<div class="container" id="rejected">
+	<div class="container" id="approved">
 		<div style="padding: 6px 12px; border: 1px solid #ccc;">
 			<h3>All Registred Users</h3> 
-			<p>The Following are all the users registered within the system </p> 
+			<p>The Following are all the users registered within the system 
+					<a href="pdf/user.php" target=0><button class="btn btn-secondary"><i class="fa fa-download"></i> download report</button></a>
+			</p> 
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>

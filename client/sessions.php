@@ -1,6 +1,6 @@
 <?php 
-	
-session_start(); 
+	include('server.php');
+//session_start(); 
 
 if (!isset($_SESSION['username'])) {
 	$_SESSION['msg'] = "You must log in first";
@@ -9,12 +9,21 @@ if (!isset($_SESSION['username'])) {
 
 if (isset($_GET['logout'])) {
 	session_destroy();
-unset($_SESSION['username']);
-unset($_SESSION['id']);
+    unset($_SESSION['username']);
+    unset($_SESSION['id']);
 	header("location: login.php");
 }
-?>
 
+$username = $_SESSION['username'];
+//   $con = mysqli_connect('localhost', 'root', '', 'blood_donation_system');
+  $query = "SELECT * FROM users WHERE username='$username'";
+  $result = mysqli_query($db, $query);
+  while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
+      $uid = $row[0]; //user id
+      $uname = $row[1]; //username
+      $uemail = $row[2]; //email
+    }
+?>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -99,116 +108,116 @@ unset($_SESSION['id']);
 		<p>Completed Sessions and progress will be here. Doctor's remarks will also be here to 
 		assist you to followup on the bookings</p>
 
-		<!-- <div class="card" style="width: 18rem;">
-			<img src="images/Counselling.jpg" class="card-img-top" alt="...">
-			<div class="card-body">
-				<h5 class="card-title">Counselling</h5>
-				<p class="card-text"><b>Doctors Remarks:</b><br>You need to watch on your Temparamental attribution and try not to let that take over you.</p>
-				<a href="#" class="btn btn-primary">View Info</a>
-			</div>
-		</div> -->
-		<div class="row">
-			<div class="col-sm-4">
-				<div class="card">
-				<img src="images/Counselling.jpg" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Counselling</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="#" class="btn btn-primary">View Info</a>
-				</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="card">
-				<img src="images/Therapy.jpg" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Therapy</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="#" class="btn btn-primary">View Info</a>
-				</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="card">
-				<img src="images/Medical.jpg" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Medical Checkup</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="#" class="btn btn-primary">View Info</a>
-				</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="card">
-				<img src="images/Therapy.jpg" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Therapy</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="#" class="btn btn-primary">View Info</a>
-				</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="card">
-				<img src="images/therapy.jpg" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Therapy</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="#" class="btn btn-primary">View Info</a>
-				</div>
-				</div>
-			</div>
-			<div class="col-sm-4">
-				<div class="card">
-				<img src="images/Counselling.jpg" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Counselling</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="#" class="btn btn-primary">View Info</a>
-				</div>
-				</div>
-			</div>
-			
-		</div>
+	</div>
+</div>
+<section class="section intro">
 
-		<div class="clearfix"></div>
-		<div class="margin-top-30"></div>
+<div class="container">
+	<div style="padding: 6px 12px; border: 1px solid #ccc;">
+	 The following showcases the summary of your sessions and the doctors remarks 
+	</div>
+</div>
+<br>
 
-		<a href="#" class="button centered">Other Functions</a>
-		<div class="margin-bottom-50"></div>
+<div class="container" id="pending">
+	<div style="padding: 6px 12px; border: 1px solid #ccc;">
+		<h3>Completed Sessions </h3> 
+		<p>The following showcases the completed sessions and he doctors remarks on the specific sessions</p>  
+
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+				<th scope="col"><b>Session#</b></th>
+				<th scope="col"><b>Scheduleid#</b></th>
+				<th scope="col"><b>Date</b></th>
+				<th scope="col"><b>Doc. Names</b></th>
+				<th scope="col"><b>Doc. Remarks</b></th>
+				<th scope="col"><b>Status</b></th>
+				<th scope="col"><b>Give Feedback</b></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+				$leo = date("Y-m-d");
+				$nul="";
+				$sql = "SELECT * FROM sessions WHERE patid='$uid' AND patremarks='$nul' ORDER BY id DESC";
+				$result = mysqli_query($db, $sql);
+				while($row = mysqli_fetch_array($result, MYSQLI_NUM))
+				{	
+                    $doc = $row[4];
+                    $sq = "SELECT *FROM doctors WHERE id='$doc'";
+                    $re = mysqli_query($db, $sq);
+                    while($rowz = mysqli_fetch_array($re, MYSQLI_NUM)){
+                        $docnames = $rowz[2]." ".$rowz[3]; 
+                    }
+
+					echo '<tr>';
+						echo '<td>'.$row[0].'</td> '; //  ID 
+						echo '<td>'.$row[1].'</td> '; //  ID 
+						echo '<td>'.$row[2].'</td> '; //Title
+						echo '<td>'.$docnames.'</td> '; //Category
+						echo '<td>'.$row[8].'</td> '; //Description
+						echo '<td>'.$row[7].'</td> '; //Description
+						echo '<td>
+								<a href="patremarks.php?id='.$row[0].'"><strong><button type="button" class="btn btn-primary">Feedback </button>
+							</td>';
+					echo '</tr>';
+				}
+				?>
+			</tbody>
+		</table>
+
 	</div>
 </div>
 
+<br>
+<div class="container" id="approved">
+	<div style="padding: 6px 12px; border: 1px solid #ccc;">
+        <h3>Your Feedback</h3> 
+		<p>the following is your feedback</p>  
 
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+				<th scope="col"><b>Session#</b></th>
+				<th scope="col"><b>Scheduleid#</b></th>
+				<th scope="col"><b>Date</b></th>
+				<th scope="col"><b>Doc. Names</b></th>
+				<th scope="col"><b>Doc. Remarks</b></th>
+				<th scope="col"><b>Status</b></th>
+				<th scope="col"><b>Your Feedback</b></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+                $leo = date("Y-m-d");
+				$sql = "SELECT * FROM sessions WHERE patid='$uid' AND patremarks !='$nul' ORDER BY id DESC";
+				$result = mysqli_query($db, $sql);
+				while($row = mysqli_fetch_array($result, MYSQLI_NUM))
+				{	
+                    $doc = $row[4];
+                    $sq = "SELECT *FROM doctors WHERE id='$doc'";
+                    $re = mysqli_query($db, $sq);
+                    while($rowz = mysqli_fetch_array($re, MYSQLI_NUM)){
+                        $docnames = $rowz[2]." ".$rowz[3]; 
+                    }
 
-
-<!-- Testimonials -->
-<div id="testimonials">
-	<!-- Slider -->
-	<div class="container">
-		<div class="sixteen columns">
-			<div class="testimonials-slider">
-				  <ul class="slides">
-				    <li>
-				      <p> Every session conts
-				      <span>No 1 , nose</span></p>
-				    </li>
-
-				    <li>
-				      <p>A problem shared is half solved
-				      <span>Med 10,42 </span></p>
-				    </li>
-				    
-				    <li>
-				      <p> Medical attention should always be administered with or without funding from the patients/victims
-				      <span>Tom Smith</span></p>
-				    </li>
-
-				  </ul>
-			</div>
-		</div>
-	</div>
+					echo '<tr>';
+						echo '<td>'.$row[0].'</td> '; //  ID 
+						echo '<td>'.$row[1].'</td> '; //  ID 
+						echo '<td>'.$row[2].'</td> '; //Title
+						echo '<td>'.$docnames.'</td> '; //Category
+						echo '<td>'.$row[8].'</td> '; //Description
+						echo '<td>'.$row[7].'</td> '; //Description
+						echo '<td>'.$row[6].'</td> '; //Description
+					echo '</tr>';
+				}
+				?>
+			</tbody>
+		</table>
 </div>
+
+</section>
 
 
 <!-- Infobox -->

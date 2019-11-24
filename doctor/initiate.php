@@ -114,7 +114,7 @@ if (isset($_GET['logout'])) {
                           $description = $row[7];
 					  }
 					?>
-                    <input name="schid" value="<?=$sid?>"/>
+                    <input name="schid" value="<?=$sid?>" readonly/>
                     <div class="form-group">
                         <div class="col-xs-6">
                             <label for="description"><h4>Session Remarks</h4></label>
