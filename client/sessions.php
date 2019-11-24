@@ -60,20 +60,17 @@ unset($_SESSION['id']);
 		<!-- Menu -->
 		<nav id="navigation" class="menu">
 			<ul id="responsive">
-
 				<li><a href="index.php">Home</a> </li>
-				<li><a href="bookings.php">Bookings</a></li>
+				<li><a href="appointments.php">Appointments</a></li>
 				<li><a href="sessions.php" id="current">Sessions</a></li>
 				<li><a href="profile.php">Profile</a></li>
-				
 				<!-- <li><a href="blog.html">Blog</a></li> -->
 			</ul>
-
+			
 			<ul class="float-right">
 				<li><a href="#"><?=$_SESSION["username"]?></a></li>
 				<li><a href="index.php?logout='1'" style="color: red;">logout</a></li>
 			</ul>
-
 		</nav>
 
 		<!-- Navigation -->

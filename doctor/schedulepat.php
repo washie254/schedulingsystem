@@ -1,6 +1,14 @@
 <?php 
-	
-session_start(); 
+    include('server.php');
+    //include('connect-db.php');
+    if (isset($_GET['id'])){
+        $sid = $_GET['id'];
+    }
+?>
+
+<?php 
+//include('server.php');
+//session_start(); 
 
 if (!isset($_SESSION['username'])) {
 	$_SESSION['msg'] = "You must log in first";
@@ -36,9 +44,6 @@ unset($_SESSION['id']);
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
-<!--[if lt IE 9]>
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
 
 </head>
 
@@ -60,86 +65,101 @@ unset($_SESSION['id']);
 		<!-- Menu -->
 		<nav id="navigation" class="menu">
 			<ul id="responsive">
-				<li><a href="index.php" id="current">Home</a> </li>
-				<li><a href="appointments.php">Appointments</a></li>
+
+				<li><a href="bookings.php"><- Back</a> </li>
+				<!-- <li><a href="bookings.php"  id="current">Bookings</a></li>
 				<li><a href="sessions.php">Sessions</a></li>
-				<li><a href="profile.php">Profile</a></li>
+				<li><a href="profile.php">Profile</a></li> -->
+				
 				<!-- <li><a href="blog.html">Blog</a></li> -->
 			</ul>
-			
+
 			<ul class="float-right">
 				<li><a href="#"><?=$_SESSION["username"]?></a></li>
 				<li><a href="index.php?logout='1'" style="color: red;">logout</a></li>
 			</ul>
+
 		</nav>
 
 		<!-- Navigation -->
 		<div id="mobile-navigation">
 			<a href="#menu" class="menu-trigger"><i class="fa fa-reorder"></i> Menu</a>
 		</div>
+
 	</div>
 </div>
 </header>
 <div class="clearfix"></div>
 
-<!-- Content
+
+<!-- Banner
 ================================================== -->
+<section class="section intro">
+    <h1 style="text-align:center;">ALLOCATE TIME </h1>
+    
+    <div class="container">
+        <div  style="padding: 6px 12px; border: 1px solid #ccc;">
+        <style>
+            .error {
+                width: 92%; 
+                margin: 0px auto; 
+                padding: 10px; 
+                border: 1px solid #a94442; 
+                color: #a94442; 
+                background: #f2dede; 
+                border-radius: 5px; 
+                text-align: left;
+            }
+        </style>
+        <form class="form" action="schedulepat.php" method="post">
+				<?php include('errors.php');?>
+				<?php
+					  $query2 = "SELECT * FROM schedules WHERE id='$sid'";
+					  $result2 = mysqli_query($db, $query2);
+					  while($row = mysqli_fetch_array($result2, MYSQLI_NUM)){
+						  $patnames = $row[2];
+                          $datescheduled = $row[4]; 
+                          $description = $row[7];
+					  }
+					?>
+                 
+                    <div class="form-group">	
+                        <div class="col-xs-6">
+                            <label for="id"><b>userdeails: </b></label>
+                            <p> <b>Schedule # :&nbsp;</b><?=$sid?><br>
+                            <b>Patient names: </b><?=$patnames?><br>
+                            <b>Description :</b><?=$description?>
+                            <input type="text" name="sid" value="<?=$sid?>" readonly/>
+                        </div>
+                    </div>
+                
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="description"><h4>Allocate time</h4></label>
+                            <input type="time" class="form-control" name="allocatedtime" required>
+						</div>
+                    </div>
 
-<!-- Categories -->
-<div class="container">
-	<div class="sixteen columns">
-		<h3 class="margin-bottom-25">Popular Categories</h3>
-		<ul id="popular-categories">
-			<li><a href="sessions.php"><i class="fa fa-line-chart trigger_popup_fricc"></i>Sessions Reports</a></li>
-			<li><a href="profile.php"><i class="fa fa-user"></i> My Account</a></li>
-			<li><a href="bookings.php"><i class="fa fa-building-o"></i>Bookings</a></li>
-			<li><a href="#"><i class="fa fa-laptop"></i> Telecommunications</a></li>  
-		</ul>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="description"><h4>instructions | Remarks</h4></label>
+                            <textarea type="time" class="form-control" name="instructions" required></textarea>
+						</div>
+                    </div>
 
-		<div class="clearfix"></div>
-		<div class="margin-top-30"></div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <br>
+                            <button class="btn btn-lg btn-success" style="width:98%;" type="submit" name="allocatetime"><i class="glyphicon glyphicon-ok-sign"></i> Allocate to specialist</button>
+                        </div>
+                    </div>
+                </form>
+        </div>
 
-		<a href="#" class="button centered">Other Functions</a>
-		<div class="margin-bottom-50"></div>
-	</div>
-</div>
-
-
-<!-- Testimonials -->
-<div id="testimonials">
-	<!-- Slider -->
-	<div class="container">
-		<div class="sixteen columns">
-			<div class="testimonials-slider">
-				  <ul class="slides">
-				    <li>
-				      <p> Scheduling reporting systemhas lota of funvtions 
-				      <span>No 1 , nose</span></p>
-				    </li>
-
-				    <li>
-				      <p>Scheduling should not be taken lightly 
-				      <span>Med 10,42 </span></p>
-				    </li>
-				    
-				    <li>
-				      <p> Medical attention should always be administered with or without funding from the patients/victims
-				      <span>Tom Smith</span></p>
-				    </li>
-
-				  </ul>
-			</div>
-		</div>
-	</div>
-</div>
+    </div>
+</section>
 
 
-<!-- Infobox -->
-<div class="infobox">
-	<div class="container">
-		<div class="sixteen columns">SchedulingReporting System Dashboard <a href="#">ADMIN</a></div>
-	</div>
-</div>
 
 
 
@@ -187,22 +207,6 @@ unset($_SESSION['id']);
 			</ul>
 		</div>
 
-	</div>
-
-	<!-- Bottom -->
-	<div class="container">
-		<div class="footer-bottom">
-			<div class="sixteen columns">
-				<h4>Follow Us</h4>
-				<ul class="social-icons">
-					<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
-					<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
-					<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
-					<li><a class="linkedin" href="#"><i class="icon-linkedin"></i></a></li>
-				</ul>
-				<div class="copyrights">©  Copyright 2019 by <a href="#">SonnieMugo</a>. All Rights Reserved.</div>
-			</div>
-		</div>
 	</div>
 
 </div>

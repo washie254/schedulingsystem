@@ -88,4 +88,29 @@
 
 	}
 	
+	//ALLOCATE TIME
+	if (isset($_POST['allocatetime'])) {
+		$sid = mysqli_real_escape_string($db, $_POST['sid']);
+		$time = mysqli_real_escape_string($db, $_POST['allocatedtime']);
+		$instructions = mysqli_real_escape_string($db, $_POST['instructions']);
+		$status ='SCHEDULED TIME';
+
+		if (empty($sid)) { array_push($errors, "cannot resolve the schedule id"); }
+		if (empty($time)) { array_push($errors, "award a time"); }
+		if (empty($instructions)) { array_push($errors, "provide some notes or instructions for the client to follow"); }
+
+		
+		if (count($errors) == 0) {
+			$query = "UPDATE schedules
+						SET
+							time_scheduled = '$time',
+							status ='$status',
+							remarks = '$instructions'
+						
+						WHERE id ='$sid'";
+			$result = mysqli_query($db, $query);
+			header('location:schedules.php');
+		}
+
+	}
 ?>

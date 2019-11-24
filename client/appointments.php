@@ -1,6 +1,6 @@
 <?php 
-	
-session_start(); 
+	include('server.php');
+//session_start(); 
 
 if (!isset($_SESSION['username'])) {
 	$_SESSION['msg'] = "You must log in first";
@@ -9,10 +9,20 @@ if (!isset($_SESSION['username'])) {
 
 if (isset($_GET['logout'])) {
 	session_destroy();
-unset($_SESSION['username']);
-unset($_SESSION['id']);
+    unset($_SESSION['username']);
+    unset($_SESSION['id']);
 	header("location: login.php");
 }
+
+$username = $_SESSION['username'];
+//   $con = mysqli_connect('localhost', 'root', '', 'blood_donation_system');
+  $query = "SELECT * FROM users WHERE username='$username'";
+  $result = mysqli_query($db, $query);
+  while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
+      $uid = $row[0]; //user id
+      $uname = $row[1]; //username
+      $uemail = $row[2]; //email
+    }
 ?>
 
 <!DOCTYPE html>
@@ -60,17 +70,20 @@ unset($_SESSION['id']);
 		<!-- Menu -->
 		<nav id="navigation" class="menu">
 			<ul id="responsive">
-				<li><a href="index.php" id="current">Home</a> </li>
-				<li><a href="appointments.php">Appointments</a></li>
+
+				<li><a href="index.php">Home</a> </li>
+				<li><a href="appointments.php" id="current">Appointments</a></li>
 				<li><a href="sessions.php">Sessions</a></li>
 				<li><a href="profile.php">Profile</a></li>
+				
 				<!-- <li><a href="blog.html">Blog</a></li> -->
 			</ul>
-			
+
 			<ul class="float-right">
 				<li><a href="#"><?=$_SESSION["username"]?></a></li>
 				<li><a href="index.php?logout='1'" style="color: red;">logout</a></li>
 			</ul>
+
 		</nav>
 
 		<!-- Navigation -->
@@ -85,24 +98,118 @@ unset($_SESSION['id']);
 <!-- Content
 ================================================== -->
 
-<!-- Categories -->
 <div class="container">
-	<div class="sixteen columns">
-		<h3 class="margin-bottom-25">Popular Categories</h3>
-		<ul id="popular-categories">
-			<li><a href="sessions.php"><i class="fa fa-line-chart trigger_popup_fricc"></i>Sessions Reports</a></li>
-			<li><a href="profile.php"><i class="fa fa-user"></i> My Account</a></li>
-			<li><a href="bookings.php"><i class="fa fa-building-o"></i>Bookings</a></li>
-			<li><a href="#"><i class="fa fa-laptop"></i> Telecommunications</a></li>  
-		</ul>
+<section class="section intro">
 
-		<div class="clearfix"></div>
-		<div class="margin-top-30"></div>
-
-		<a href="#" class="button centered">Other Functions</a>
-		<div class="margin-bottom-50"></div>
+<div class="container">
+	<div style="padding: 6px 12px; border: 1px solid #ccc;">
+	 The summary of my scheduled apointments  
 	</div>
 </div>
+<br>
+
+<div class="container" id="pending">
+	<div style="padding: 6px 12px; border: 1px solid #ccc;">
+		<h3>Todays Appointments </h3> 
+		<p>The following are the appoinments scheduled for today</p>  
+
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+				<th scope="col"><b>Schid#</b></th>
+				<th scope="col"><b>Your Id</b></th>
+				<th scope="col"><b>Names</b></th>
+				<th scope="col"><b>Doc. Names</b></th>
+				<th scope="col"><b>Category</b></th>
+				<th scope="col"><b>Allocated Day</b></th>
+				<th scope="col"><b>Allocated Time</b></th>
+				<th scope="col"><b>Specialists' Remarks</b></th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+                $leo = date("Y-m-d");
+				$sql = "SELECT * FROM schedules WHERE pat_id='$uid' AND date_scheduled='$leo' ORDER BY date_scheduled";
+				$result = mysqli_query($db, $sql);
+				while($row = mysqli_fetch_array($result, MYSQLI_NUM))
+				{	
+                    $doc = $row[3];
+                    $sq = "SELECT *FROM doctors WHERE id='$doc'";
+                    $re = mysqli_query($db, $sq);
+                    while($rowz = mysqli_fetch_array($re, MYSQLI_NUM)){
+                        $docnames = $rowz[2]." ".$rowz[3]; 
+                    }
+
+					echo '<tr>';
+						echo '<td>'.$row[0].'</td> '; //  ID 
+						echo '<td>'.$row[1].'</td> '; //  ID 
+						echo '<td>'.$row[2].'</td> '; //Title
+						echo '<td>'.$docnames.'</td> '; //Category
+						echo '<td>'.$row[8].'</td> '; //Description
+						echo '<td>'.$row[4].'</td> '; //Status
+						echo '<td>'.$row[5].'</td> '; //Status
+                        echo '<td>'.$row[9].'</td> '; //Status
+					echo '</tr>';
+				}
+				?>
+			</tbody>
+		</table>
+
+	</div>
+</div>
+
+<br>
+<div class="container" id="approved">
+	<div style="padding: 6px 12px; border: 1px solid #ccc;">
+        <h3>All Schedules</h3> 
+		<p>the following are the details of all your schedules</p>  
+
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+				<th scope="col"><b>Schid#</b></th>
+				<th scope="col"><b>Your Id</b></th>
+				<th scope="col"><b>Names</b></th>
+				<th scope="col"><b>Doc. Names</b></th>
+				<th scope="col"><b>Category</b></th>
+				<th scope="col"><b>Allocated Day</b></th>
+				<th scope="col"><b>Allocated Time</b></th>
+				<th scope="col"><b>Specialists' Remarks</b></th>
+				</tr>
+			</thead>
+			<tbody>
+            <?php
+                $leo = date("Y-m-d");
+				$sql = "SELECT * FROM schedules WHERE pat_id='$uid' ORDER BY date_scheduled";
+				$result = mysqli_query($db, $sql);
+				while($row = mysqli_fetch_array($result, MYSQLI_NUM))
+				{	
+                    $doc = $row[3];
+                    $sq = "SELECT *FROM doctors WHERE id='$doc'";
+                    $re = mysqli_query($db, $sq);
+                    while($rowz = mysqli_fetch_array($re, MYSQLI_NUM)){
+                        $docnames = $rowz[2]." ".$rowz[3]; 
+                    }
+
+					echo '<tr>';
+						echo '<td>'.$row[0].'</td> '; //  ID 
+						echo '<td>'.$row[1].'</td> '; //  ID 
+						echo '<td>'.$row[2].'</td> '; //Title
+						echo '<td>'.$docnames.'</td> '; //Category
+						echo '<td>'.$row[8].'</td> '; //Description
+						echo '<td>'.$row[4].'</td> '; //Status
+						echo '<td>'.$row[5].'</td> '; //Status
+                        echo '<td>'.$row[9].'</td> '; //Status
+					echo '</tr>';
+				}
+				?>
+			</tbody>
+		</table>
+</div>
+
+</section>
+</div>
+
 
 
 <!-- Testimonials -->
