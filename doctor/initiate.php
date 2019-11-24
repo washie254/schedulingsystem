@@ -4,11 +4,6 @@
     if (isset($_GET['id'])){
         $sid = $_GET['id'];
     }
-?>
-
-<?php 
-//include('server.php');
-//session_start(); 
 
 if (!isset($_SESSION['username'])) {
 	$_SESSION['msg'] = "You must log in first";
@@ -17,8 +12,8 @@ if (!isset($_SESSION['username'])) {
 
 if (isset($_GET['logout'])) {
 	session_destroy();
-unset($_SESSION['username']);
-unset($_SESSION['id']);
+    unset($_SESSION['username']);
+    unset($_SESSION['id']);
 	header("location: login.php");
 }
 ?>
@@ -67,11 +62,6 @@ unset($_SESSION['id']);
 			<ul id="responsive">
 
 				<li><a href="schedules.php"><- Back</a> </li>
-				<!-- <li><a href="bookings.php"  id="current">Bookings</a></li>
-				<li><a href="sessions.php">Sessions</a></li>
-				<li><a href="profile.php">Profile</a></li> -->
-				
-				<!-- <li><a href="blog.html">Blog</a></li> -->
 			</ul>
 
 			<ul class="float-right">
@@ -95,9 +85,11 @@ unset($_SESSION['id']);
 <!-- Banner
 ================================================== -->
 <section class="section intro">
-    <h1 style="text-align:center;">ALLOCATE TIME </h1>
+    <h1 style="text-align:center;">Session Details </h1>
+    
     
     <div class="container">
+    <p>fill in the following details about the session wih the patient for a review later </p>
         <div  style="padding: 6px 12px; border: 1px solid #ccc;">
         <style>
             .error {
@@ -111,52 +103,51 @@ unset($_SESSION['id']);
                 text-align: left;
             }
         </style>
-        <form class="form" action="schedulepat.php" method="post">
+        <form class="form" action="initiate.php" method="post">
 				<?php include('errors.php');?>
 				<?php
 					  $query2 = "SELECT * FROM schedules WHERE id='$sid'";
 					  $result2 = mysqli_query($db, $query2);
 					  while($row = mysqli_fetch_array($result2, MYSQLI_NUM)){
 						  $patnames = $row[2];
-                          $datescheduled = $row[4]; 
+                          $datescheduled = $row[4];
                           $description = $row[7];
 					  }
 					?>
-                 
-                    <div class="form-group">	
-                        <div class="col-xs-6">
-                            <label for="id"><b>userdeails: </b></label>
-                            <p> <b>Schedule # :&nbsp;</b><?=$sid?><br>
-                            <b>Patient names: </b><?=$patnames?><br>
-                            <b>Description :</b><?=$description?>
-                            <input type="text" name="sid" value="<?=$sid?>" readonly/>
-                        </div>
-                    </div>
-                
+                    <input name="schid" value="<?=$sid?>"/>
                     <div class="form-group">
                         <div class="col-xs-6">
-                            <label for="description"><h4>Allocate time</h4></label>
-                            <input type="time" class="form-control" name="allocatedtime" required>
+                            <label for="description"><h4>Session Remarks</h4></label>
+                            <textarea type="time" class="form-control" name="sessionremarks" placeholder="Write some brief remarks for the patient to follow" required></textarea>
 						</div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-6">
-                            <label for="description"><h4>instructions | Remarks</h4></label>
-                            <textarea type="time" class="form-control" name="instructions" required></textarea>
+                            <label for="description"><h4>Own notes</h4></label>
+                            <textarea type="time" class="form-control" name="ownnotes" placeholder="write some personal notes. this wont be shared with the patient" required></textarea>
+						</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="description"><h4>Time session Ended</h4></label>
+                            <input type="time" class="form-control" name="endtime" required />
 						</div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-12">
                             <br>
-                            <button class="btn btn-lg btn-success" style="width:98%;" type="submit" name="allocatetime"><i class="glyphicon glyphicon-ok-sign"></i> Allocate Time</button>
+                            <button class="btn btn-lg btn-success" style="width:98%;" type="submit" name="closesession"><i class="glyphicon glyphicon-ok-sign"></i> Commit session details</button>
                         </div>
                     </div>
                 </form>
         </div>
 
     </div>
+
+    <br>
 </section>
 
 

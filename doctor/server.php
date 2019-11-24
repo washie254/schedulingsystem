@@ -113,4 +113,43 @@
 		}
 
 	}
+
+	//closesession
+	if (isset($_POST['closesession'])) {
+		$sremarks = mysqli_real_escape_string($db, $_POST['sessionremarks']);
+		$sownnotes = mysqli_real_escape_string($db, $_POST['ownnotes']);
+		$sendtime = mysqli_real_escape_string($db, $_POST['endtime']);
+		$schid = mysqli_real_escape_string($db, $_POST['schid']);
+		$date = date("Y-m-d");
+		$status = 'COMPLETED';
+		
+		$que = "SELECT * FROM schedules WHERE id='$schid'";
+		$res = mysqli_query($db, $que);
+		while($rowz = mysqli_fetch_array($res, MYSQLI_NUM)){
+			$patid = $rowz[1];
+			$docid = $rowz[3];
+		}
+
+		if (empty($sremarks)) { array_push($errors, "provide some"); }
+		if (empty($sownnotes)) { array_push($errors,"Write some own notes"); }
+		if (empty($sendtime)) { array_push($errors, "state the end time of the session"); }
+
+		if (count($errors) == 0) {
+
+			$query0 = "INSERT INTO sessions (schedule_id, date, patid, docid, docremarks, status, docadvice)
+									VALUES('$schid','$date','$patid','$docid','$sownnotes','$status','$sremarks')";
+			$query = "UPDATE schedules
+						SET
+							status = 'COMPLETED'
+						WHERE id ='$schid'";
+
+			$query1 =" UPDATE users SET schstatus = 'NO' WHERE id='$patid' ";
+
+			mysqli_query($db, $query0);
+			mysqli_query($db, $query1);
+			mysqli_query($db, $query);
+			header('location:schedules.php');
+		}
+
+	}
 ?>

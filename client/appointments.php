@@ -248,8 +248,6 @@ $username = $_SESSION['username'];
 	</div>
 </div>
 
-
-
 <!-- Footer
 ================================================== -->
 <!-- <div class="margin-top-15"></div> -->

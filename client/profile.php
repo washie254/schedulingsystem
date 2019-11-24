@@ -152,8 +152,8 @@ unset($_SESSION['id']);
                             $uname = $row[1];
 							$names = $row[2] ." ".$row[3]; //names
 							$email = $row[9]; //email
-							$telno = $row[4]; //telno
-							$idnum = $row[3]; //id number
+							$telno = $row[5]; //telno
+							$idnum = $row[4]; //id number
 							$loca = $row[7].", ".$row[6]; //location
                             $dateregistered = $row[11]; //date registered
                             $dob = $row[8];
@@ -174,7 +174,7 @@ unset($_SESSION['id']);
                             <label class="label">Tel No:</label><?php echo $telno; ?><br>
                             <label class="label">ID Num:</label><?php echo $idnum; ?><br>
                             <label class="label">Location:</label><?php echo $loca; ?><br>
-                            <label class="label">Date Created:</label><?php echo $dob; ?><br>
+                            <label class="label">Date Created:</label><?php echo $dateregistered; ?><br>
                         
                         </td>
                     </tr>

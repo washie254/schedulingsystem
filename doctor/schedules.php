@@ -182,7 +182,7 @@ while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
 			<tbody>
 				<?php
                 $leo = date("Y-m-d");
-				$sql = "SELECT * FROM schedules WHERE doc_id='$docid'AND status !='PENDING' and date_scheduled='$leo' ORDER BY date_scheduled";
+				$sql = "SELECT * FROM schedules WHERE doc_id='$docid'AND status !='PENDING' and date_scheduled='$leo' ORDER BY time_scheduled";
 				$result = mysqli_query($db, $sql);
 				while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 				{	
