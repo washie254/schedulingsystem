@@ -139,7 +139,7 @@ unset($_SESSION['id']);
 							echo '<td>'.$row[5].'</td> '; //Time
 							echo '<td>'.$row[8].'</td> '; //Status
 							echo '<td>
-									<a href="#"><strong><button type="button" class="btn btn-success">Accept</button>
+									<a href="accept.php?id='.$row[0].'"><strong><button type="button" class="btn btn-success">Accept</button>
 									<a href="reject.php?id='.$row[0].'"><strong><button type="button" class="btn btn-danger">Reject</button>
 								  </td>';
 						echo '</tr>';

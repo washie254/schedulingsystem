@@ -1,7 +1,5 @@
 <?php 
-	
-session_start(); 
-
+include('server.php');
 if (!isset($_SESSION['username'])) {
 	$_SESSION['msg'] = "You must log in first";
 	header('location: login.php');
@@ -96,21 +94,101 @@ unset($_SESSION['id']);
 
 <!-- Categories -->
 <div class="container">
-	<div class="sixteen columns">
-		<h3 class="margin-bottom-25">Popular Categories</h3>
-		<ul id="popular-categories">
-			<li><a href="reports.php"><i class="fa fa-line-chart trigger_popup_fricc"></i>Reports</a></li>
-			<li><a href="bookings.php"><i class="fa fa-building-o"></i> Bookings</a></li>
-			<li><a href="scheduled.php"><i class="fa fa-book"></i>Scheduled</a></li>
-			<li><a href="users.php"><i class="fa fa-users"></i> Users</a></li> 
-		</ul>
+<section class="section intro">
 
-		<div class="clearfix"></div>
-		<div class="margin-top-30"></div>
-
-		<a href="#" class="button centered">Other Functions</a>
-		<div class="margin-bottom-50"></div>
+<div class="container">
+	<div style="padding: 6px 12px; border: 1px solid #ccc;">
+	 The folowing showcases the reported Bookings made By the users in the system <br>
+		QUICK LINKS:   
+		<a href="#pending"><button type="button" class="btn btn-outline-success">Schedule A Patient </button></a>
+		<a href="#approved"><button type="button" class="btn btn-outline-primary">Scheduled Patients</button></a>
 	</div>
+</div>
+<br>
+
+<div class="container" id="pending">
+	<div style="padding: 6px 12px; border: 1px solid #ccc;">
+		<h3>Schedule Patient</h3> 
+		<p>the following are the deails of the registered patients that can be scheduled</p>  
+
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+				<th scope="col"><b>pat ID</b></th>
+				<th scope="col"><b>names</b></th>
+				<th scope="col"><b>ID #</b></th>
+				<th scope="col"><b>email</b></th>
+				<th scope="col"><b>Schedule</b></th>
+				</tr>
+			</thead>
+			<tbody>
+			<?php
+				$sql = "SELECT * FROM users WHERE schstatus='NO'";
+				$result = mysqli_query($db, $sql);
+				while($row = mysqli_fetch_array($result, MYSQLI_NUM))
+				{	
+				
+					echo '<tr>';
+						echo '<td>'.$row[0].'</td> '; //  ID 
+						echo '<td>'.$row[2].'</td> '; //  ID 
+						echo '<td>'.$row[4].'</td> '; //Title
+						echo '<td>'.$row[9].'</td> '; //Category
+						echo '<td>
+								<a href="schedulepat.php?id='.$row[0].'"><strong><button type="button" class="btn btn-success">Schedule</button>
+							  </td>';
+					echo '</tr>';
+				}
+				?>
+			</tbody>
+		</table>
+
+	</div>
+</div>
+
+<br>
+<div class="container" id="approved">
+	<div style="padding: 6px 12px; border: 1px solid #ccc;">
+		<h3>Scheduled Patients</h3> 
+		<p> the following are the scheduled patients</p>  
+	<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+				<th scope="col"><b>Schid#</b></th>
+				<th scope="col"><b>Pat. Id</b></th>
+				<th scope="col"><b>Pat. Names</b></th>
+				<th scope="col"><b>Doc. ID</b></th>
+				<th scope="col"><b>Category</b></th>
+				<th scope="col"><b>Allocated Day</b></th>
+				<th scope="col"><b>description</b></th>
+				<th scope="col"><b>status</b></th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<?php
+				$sql = "SELECT * FROM schedules ORDER BY date_scheduled";
+				$result = mysqli_query($db, $sql);
+				while($row = mysqli_fetch_array($result, MYSQLI_NUM))
+				{	
+					$day = $row[4]." at &nbsp;".$row[5];
+					echo '<tr>';
+						echo '<td>'.$row[0].'</td> '; //  ID 
+						echo '<td>'.$row[1].'</td> '; //  ID 
+						echo '<td>'.$row[2].'</td> '; //Title
+						echo '<td>'.$row[3].'</td> '; //Category
+
+						echo '<td>'.$row[8].'</td> '; //Description
+						echo '<td>'.$day.'</td> '; //Status
+						echo '<td>'.$row[7].'</td> '; //Status
+						echo '<td>'.$row[6].'</td> '; //Status
+					echo '</tr>';
+				}
+				?>
+			</tbody>
+		</table>
+</div>
+
+</section>
 </div>
 
 

@@ -16,7 +16,7 @@
 		$password = mysqli_real_escape_string($db, $_POST['password']);
 
 		if (empty($username)) {
-			array_push($errors, "Username is required"); //sasa
+			array_push($errors, "Username is required"); //sasas
 		}
 		if (empty($password)) {
 			array_push($errors, "Password is required");
@@ -126,6 +126,7 @@
 		$lname = mysqli_real_escape_string($db, $_POST['lname']);
 		$password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
 		$password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
+		$scstat = 'NO';
 
 		if (empty($fname)) { array_push($errors, "Enter First name of client"); }
 		if (empty($lname)) { array_push($errors, "Client's Second name required"); }
@@ -141,12 +142,47 @@
 	
 		if (count($errors) == 0) {
 			$password = md5($password_1);//encrypt the password before saving in the database
-			$query = "INSERT INTO users (username, fname, lname, idnumber, email, password, dateregistered) 
-					  VALUES('$username','$fname','$lname','$idnumber', '$email','$password', '$cdate')";
+			$query = "INSERT INTO users (username, fname, lname, idnumber, email, password, dateregistered, schstatus) 
+					  VALUES('$username','$fname','$lname','$idnumber', '$email','$password', '$cdate', '$scstat')";
 			mysqli_query($db, $query);
 
 			header('location: clients.php');
 		}
 	}
 
+	//Allocate Patent to a specialist
+	if (isset($_POST['allocatedoc'])) {
+		$patid = mysqli_real_escape_string($db, $_POST['patid']);
+		$patnames = mysqli_real_escape_string($db,$_POST['patnames']);
+		$docid = mysqli_real_escape_string($db, $_POST['specialistid']);
+		$datescheduled = mysqli_real_escape_string($db, $_POST['allocateddate']);
+		$description = mysqli_real_escape_string($db, $_POST['description']);
+		$status = 'PENDING';
+
+	
+			
+		$result = $db->query("SELECT id, username , categoryname FROM doctors WHERE id='$docid'");
+		while ($row = $result->fetch_assoc()) {
+			unset($cat);
+			$cat= $row['categoryname']; 
+		}
+
+		if (empty($patid)) { array_push($errors, "pat id"); }
+		if (empty($patnames)) { array_push($errors, "pat names"); }
+		if (empty($datescheduled)) { array_push($errors, "datescheduled"); }
+		if (empty($docid)) { array_push($errors, "doc id"); }
+		if (empty($description)) { array_push($errors, "description"); }
+		if (empty($cat)) { array_push($errors, "category"); }
+
+		if (count($errors) == 0) {
+			$query = "INSERT INTO schedules (pat_id, pat_name, doc_id, date_scheduled, status, description, category)
+						VALUES('$patid','$patnames','$docid', '$datescheduled','$status', '$description','$cat')";
+			mysqli_query($db, $query);
+
+			$query0 = "UPDATE users SET schstatus='YES' WHERE id='$patid'";
+			mysqli_query($db, $query0);
+
+			header('location: schedule.php');
+		}
+	}
 ?>

@@ -1,4 +1,3 @@
-
 <?php 
     include('server.php');
     //include('connect-db.php');
@@ -96,7 +95,7 @@ unset($_SESSION['id']);
 <!-- Banner
 ================================================== -->
 <section class="section intro">
-    <h1 style="text-align:center;">[[  :: REJECT BOOKING REQUEST :: ]]</h1>
+    <h1 style="text-align:center;">[[  :: ALLOCATE PATIENT TO A SPECIALIST :: ]]</h1>
     
     <div class="container">
         <div  style="padding: 6px 12px; border: 1px solid #ccc;">
@@ -112,41 +111,66 @@ unset($_SESSION['id']);
                 text-align: left;
             }
         </style>
-        <form class="form" action="reject.php" method="post">
+        <form class="form" action="schedulepat.php" method="post">
 				<?php include('errors.php');?>
 				<?php
-					  $query2 = "SELECT * FROM bookings WHERE id='$bid'";
+					  $query2 = "SELECT * FROM users WHERE id='$bid'";
 					  $result2 = mysqli_query($db, $query2);
 					  while($row = mysqli_fetch_array($result2, MYSQLI_NUM)){
 						  $uid = $row[0]; // E ID 
-						  $btitle = $row[6];
-                          $unames = $row[2]; 
-                          $description = $row[7];
+						  $patnames = $row[2]." ".$row[3];
+                          $patemail = $row[9]; 
+                          $patidnumber = $row[4];
 
 					  }
 					?>
                  
                     <div class="form-group">	
                         <div class="col-xs-6">
-                            <label for="id"><b>Book# : </b><?=$bid?></label>
-                            <label for="Title">||  <b>Title </b>: <?=$btitle?></label>
-                            <label for="User">||  <b>User </b>: <?=$unames?></label>
-                            <textarea type="text" class="form-control" name="title" id="title" placeholder="<?=$description?>" disabled></textarea>
+                            <label for="id"><b>userdeails: </b></label>
+                            <input type="text" class="form-control" name="patid" id="uid" value="<?=$uid?>" readonly/>
+                            <input type="text" class="form-control" name="patnames" id="patnames" value="<?=$patnames?>" readonly/>
+                            <input type="text" class="form-control" name="patemail" id="patemail" placeholder="<?=$patemail?>" readonly/>
+                            <input type="text" class="form-control" name="patidnumber" id="patidnumber" placeholder="<?=$patidnumber?>" readonly/>
                         </div>
                     </div>
-
-                    <input name="bid" value="<?=$bid?>" style="opacity: 0;" />
                     <div class="form-group">
                         <div class="col-xs-6">
-                            <label for="description"><h4>Reason For Rejecting</h4></label>
-                            <textarea type="text" class="form-control" name="reason" placeholder="Add a brief description as to why u are rejecting"></textarea>
+                            <label for="description"><h4>Select specialist</h4></label>
+                            
+                            <?php                 
+					$result = $db->query("SELECT id, username , categoryname FROM doctors ");
+					echo "<select class='form-control' name='specialistid'>";
+						while ($row = $result->fetch_assoc()) {
+						unset($id, $name);
+						$id = $row['id'];
+                        $username = $row['username'];
+                        $area = $row['categoryname'];
+                        echo '<option value="'.$id.'">'.$username." <b>#</b>".$area.'</option>'; 
+                    }
+					echo "</select>";
+				?>
+						</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="description"><h4>Describe condition of patient</h4></label>
+                            <textarea type="text" class="form-control" name="description" placeholder="Add a brief description of the patients condition" required></textarea>
+						</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="description"><h4>Allocate Date</h4></label>
+                            <input type="date" class="form-control" name="allocateddate" required>
 						</div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-12">
                             <br>
-                            <button class="btn btn-lg btn-danger" style="width:98%;" type="submit" name="reject"><i class="glyphicon glyphicon-ok-sign"></i> Reject Booking</button>
+                            <button class="btn btn-lg btn-success" style="width:98%;" type="submit" name="allocatedoc"><i class="glyphicon glyphicon-ok-sign"></i> Allocate to specialist</button>
                         </div>
                     </div>
                 </form>

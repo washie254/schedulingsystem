@@ -103,6 +103,39 @@ unset($_SESSION['id']);
 		<div style="padding: 6px 12px; border: 1px solid #ccc;">
 			<h3>Users and Reported Scheduling</h3> 
 			<p>A mapping of the users andd count of Scheduling they have reported</p> 
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+					<th scope="col"><b>ID#</b></th>
+					<th scope="col"><b>Other Names</b></th>
+					<th scope="col"><b>Email</b></th>
+                    <th scope="col"><b>Date Registered</b></th>
+					<th scope="col"><b># of schecdules</b></th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- [ LOOP THE REGISTERED AGENTS ] -->
+					<?php
+
+
+					$sql = "SELECT * FROM users  ORDER BY id ";
+					$result = mysqli_query($db, $sql);
+					while($row = mysqli_fetch_array($result, MYSQLI_NUM))
+					{	$padid= $row[0];
+						$query = mysqli_query($db, "SELECT * FROM schedules WHERE pat_id='$padid'");
+						$number=mysqli_num_rows($query);
+
+						echo '<tr>';
+							echo '<td>'.$row[0].'</td> '; //  ID 
+							echo '<td>'.$row[2]." ".$row[3].'</td> '; //Title
+							echo '<td>'.$row[9].'</td> '; //Category
+							echo '<td>'.$row[11].'</td> '; //Date
+							echo '<td>'.$number.'</td> '; //Date
+						echo '</tr>';
+					}
+					?>
+				</tbody>
+			</table>
 		</div>
 	</div>
 
@@ -111,33 +144,36 @@ unset($_SESSION['id']);
 		<div style="padding: 6px 12px; border: 1px solid #ccc;">
 			<h3>All Registred Users</h3> 
 			<p>The Following are all the users registered within the system </p> 
-			<table class="table table-bordered table-striped table-dark">
+			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-					<th scope="col">U. Id</th>
-					<th scope="col">User Name</th>
-					<th scope="col">Other Names</th>
-					<th scope="col">email </th>
-					<th scope="col">Tel No </th>
-					<th scope="col">ID. No</th>
+					<th scope="col"><b>ID#</b></th>
+					<th scope="col"><b>Username</b></th>
+					<th scope="col"><b>Other Names</b></th>
+					<th scope="col"><b>Email</b></th>
+					<th scope="col"><b>Tel No</b></th>
+					<th scope="col"><b>Id Number</b></th>
+                    <th scope="col"><b>Date Registered</b></th>
 					</tr>
 				</thead>
 				<tbody>
 					<!-- [ LOOP THE REGISTERED AGENTS ] -->
 					<?php
 
-					$sql = "SELECT * FROM userprofile ";
+
+					$sql = "SELECT * FROM users  ORDER BY id ";
 					$result = mysqli_query($db, $sql);
 					while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 					{	
-						$names = $row[3]." ".$row[4];
+					
 						echo '<tr>';
-							echo '<td>'.$row[0].'</td> '; // E ID 
-							echo '<td>'.$row[1].'</td> '; //USER
-							echo '<td>'.$names.'</td> '; //Title
-							echo '<td>'.$row[2].'</td> '; //Title
-							echo '<td>'.$row[6].'</td> '; //Title
-							echo '<td>'.$row[5].'</td> '; //Title
+							echo '<td>'.$row[0].'</td> '; //  ID 
+							echo '<td>'.$row[1].'</td> '; //  ID 
+							echo '<td>'.$row[2]." ".$row[3].'</td> '; //Title
+							echo '<td>'.$row[9].'</td> '; //Category
+							echo '<td>'.$row[5].'</td> '; //Description
+                            echo '<td>'.$row[4].'</td> '; //Date
+                            echo '<td>'.$row[11].'</td> '; //Date
 						echo '</tr>';
 					}
 					?>

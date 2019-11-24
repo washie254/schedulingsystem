@@ -62,7 +62,7 @@ unset($_SESSION['id']);
 			<ul id="responsive">
 
 				<li><a href="index.php" id="current">Home</a> </li>
-				<li><a href="bookings.php">Bookings</a></li>
+				<li><a href="Schedules.php">Schedules</a></li>
 				<li><a href="sessions.php">Sessions</a></li>
 				<li><a href="profile.php">Profile</a></li>
 				
@@ -94,9 +94,9 @@ unset($_SESSION['id']);
 		<h3 class="margin-bottom-25">Popular Categories</h3>
 		<ul id="popular-categories">
 			<li><a href="sessions.php"><i class="fa fa-line-chart trigger_popup_fricc"></i>Sessions Reports</a></li>
+			<li><a href="schedules.php"><i class="fa fa-building-o"></i>Schedules</a></li>
 			<li><a href="profile.php"><i class="fa fa-user"></i> My Account</a></li>
-			<li><a href="bookings.php"><i class="fa fa-building-o"></i>Bookings</a></li>
-			<li><a href="#"><i class="fa fa-laptop"></i> Telecommunications</a></li>  
+			<li><a href="mypatients.php"><i class="fa fa-users"></i> Patients</a></li>  
 		</ul>
 
 		<div class="clearfix"></div>

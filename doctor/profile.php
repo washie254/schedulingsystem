@@ -50,12 +50,12 @@ unset($_SESSION['id']);
 	<?php
 	  $username = $_SESSION['username'];
 	//   $con = mysqli_connect('localhost', 'root', '', 'blood_donation_system');
-	  $query = "SELECT * FROM users WHERE username='$username'";
+	  $query = "SELECT * FROM doctors WHERE username='$username'";
 	  $result = mysqli_query($db, $query);
 	  while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
 		  $uid = $row[0]; //user id
 		  $uname = $row[1]; //username
-		  $uemail = $row[2]; //email
+		  $uemail = $row[5]; //email
 	  }
 	?>
 <div class="container">
@@ -91,30 +91,8 @@ unset($_SESSION['id']);
 </div>
 </header>
 
-<!-- ====================================MAPS -->
-<script>
-    if(!navigator.geolocation){
-    alert('Your Browser does not support HTML5 Geo Location. Please Use Newer Version Browsers');
-    }
-    navigator.geolocation.getCurrentPosition(success, error);
-    function success(position){
-    var latitude  = position.coords.latitude;	
-    var longitude = position.coords.longitude;	
-    var accuracy  = position.coords.accuracy;
-    document.getElementById("lat").value  = latitude;
-    document.getElementById("lng").value  = longitude;
-    document.getElementById("acc").value  = accuracy;
-    }
-    function error(err){
-    alert('ERROR(' + err.code + '): ' + err.message);
-    }
-</script>
-<!-- ====================================MAPS -->
-
-
 
 <div class="clearfix"></div>
-
 
 <section class="section intro">
 
@@ -136,7 +114,7 @@ unset($_SESSION['id']);
                         color: #58BA2B;
                     }
                 </style>
-                <table class="table table-dark">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th sope="col">Avatar</th>
@@ -145,18 +123,16 @@ unset($_SESSION['id']);
                     </thead>
                     <?php
                         $user = $_SESSION['username'];
-                        $query2 = "SELECT * FROM users WHERE username='$user'";
+                        $query2 = "SELECT * FROM doctors WHERE username='$user'";
                         $result2 = mysqli_query($db, $query2);
                         while($row = mysqli_fetch_array($result2, MYSQLI_NUM)){
                             $uid = $row[0]; // E ID 
                             $uname = $row[1];
 							$names = $row[2] ." ".$row[3]; //names
-							$email = $row[9]; //email
+							$email = $row[5]; //email
 							$telno = $row[4]; //telno
-							$idnum = $row[3]; //id number
-							$loca = $row[7].", ".$row[6]; //location
-                            $dateregistered = $row[11]; //date registered
-                            $dob = $row[8];
+                            $categoryname = $row[7];
+                            $about = $row[9];
 
                         }
                     
@@ -168,13 +144,12 @@ unset($_SESSION['id']);
                             <label class="label">Username :</label> <?php echo $uname; ?><br>
                             <label class="label">Other Names:</label> <?php echo $names; ?><br>
                             <label class="label">Email:</label><?php echo $email; ?><br>
-                            <label class="label">DOB:</label><?php echo $dob; ?><br>
                         </td>
                         <td>
                             <label class="label">Tel No:</label><?php echo $telno; ?><br>
-                            <label class="label">ID Num:</label><?php echo $idnum; ?><br>
-                            <label class="label">Location:</label><?php echo $loca; ?><br>
-                            <label class="label">Date Created:</label><?php echo $dob; ?><br>
+                            <label class="label">Category:</label><?php echo $categoryname; ?><br>
+                            <label class="label">about:</label>
+                            <textarea class="form-control" name="about" readonly><?php echo $about;?></textarea>
                         
                         </td>
                     </tr>
@@ -199,69 +174,54 @@ unset($_SESSION['id']);
 				</style>
                 <?php require('errors.php'); ?>
                 <?php 
-                    $resultz = mysqli_query($db,"SELECT * FROM users WHERE id='$uid'");
+                    $resultz = mysqli_query($db,"SELECT * FROM doctors WHERE id='$uid'");
                     $rowz= mysqli_fetch_array($resultz);
                 ?>
 				<form class="form" action="profile.php" method="post">
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="first_name"><h4>Username</h4></label>
+                            <input type="text" class="form-control" name="uname" id="uname" value="<?php echo $rowz['username']; ?>" required>
+                        </div>
+                    </div>
 					<div class="form-group">
                         <div class="col-xs-6">
                             <label for="first_name"><h4>First name</h4></label>
-                            <input type="text" class="form-control" name="fname" id="fname" value="<?php echo $rowz['fname']; ?>">
+                            <input type="text" class="form-control" name="fname" id="fname" value="<?php echo $rowz['fname']; ?>" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-xs-6">
                             <label for="last_name"><h4>Last name</h4></label>
-                            <input type="text" class="form-control" name="lname" id="lname" value="<?php echo $rowz['lname']; ?>">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-xs-6">
-                            <label for="idnumber"><h4> Id Number</h4></label>
-                            <input type="text" class="form-control" name="idnumber" id="idnumber" value="<?php echo $rowz['idnumber']; ?>">
+                            <input type="text" class="form-control" name="lname" id="lname" value="<?php echo $rowz['lname']; ?>" required>
                         </div>
                     </div>
 
                     <div class="form-group">	
                         <div class="col-xs-6">
                             <label for="phone"><h4>Phone</h4></label>
-                            <input type="text" class="form-control" name="phone" id="phone" value="<?php echo $rowz['tel']; ?>">
+                            <input type="text" class="form-control" name="phone" id="phone" value="<?php echo $rowz['telno']; ?>" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-6">
                             <label for="email"><h4>Email</h4></label>
-                            <input type="email" class="form-control" name="email" id="email" value="<?php echo $rowz['email']; ?>">
+                            <input type="email" class="form-control" name="email" id="email" value="<?php echo $rowz['email']; ?>"  required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-xs-6">
-                            <label for="county"><h4>County</h4></label>
-                            <input type="text" class="form-control" name="county" value="<?php echo $rowz['county']; ?>">
+                            <label for="town"><h4>About</h4></label>
+                            <textarea type="text" class="form-control" name="aboutdoc" placeholder="a summary about your expertise" required><?php echo $rowz['aboutdoc']; ?></textarea>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <div class="col-xs-6">
-                            <label for="town"><h4>Town</h4></label>
-                            <input type="text" class="form-control" name="town" value="<?php echo $rowz['town']; ?>">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-xs-6">
-                            <label for="county"><h4>Date of Birth</h4></label>
-                            <input type="date" class="form-control" name="dob" value="<?php echo $rowz['dob']; ?>">
-                        </div>
-                    </div>
-
 
                     <div class="form-group">
                         <!-- <input type="text" id="lat" name="lat" style="opacity: 0;" />
                         <input type="text" id="lng" name="lng" style="opacity: 0.2;"/> -->
-                        <input type="text" id="uid" name="uid" style="opacity: 0;" value="<?=$uid?>"/>
+                        <input type="text" id="uid" name="uid" style="opacity: 0.4;" value="<?=$uid?>" readonly/>
                     </div>
 
                     <div class="form-group">
